@@ -3,10 +3,14 @@ import {NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
+import {RandomComponent} from "./accueil/random/random.component";
+import {ConfiguratorComponent} from "./accueil/configurator/configurator.component";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    RandomComponent,
+    ConfiguratorComponent
   ],
   imports: [
     BrowserModule,
@@ -15,4 +19,5 @@ import {AppComponent} from './app.component';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
