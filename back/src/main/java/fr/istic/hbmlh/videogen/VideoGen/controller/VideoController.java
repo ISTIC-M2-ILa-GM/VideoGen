@@ -33,5 +33,11 @@ public class VideoController {
       .body(resource);
   }
 
+  @GetMapping("configuration")
+  public ValueWrapper<String> getConfig() {
+    // TODO envoyer un vrai fichier videogen
+    return new ValueWrapper<>("");
+  }
+
 
 }
