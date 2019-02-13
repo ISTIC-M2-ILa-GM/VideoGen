@@ -1,4 +1,4 @@
-package fr.istic.hbmlh.videogen.VideoGen.dto;
+package fr.istic.hbmlh.videogen.dto;
 
 public class ValueWrapper<T> {
   private final T value;

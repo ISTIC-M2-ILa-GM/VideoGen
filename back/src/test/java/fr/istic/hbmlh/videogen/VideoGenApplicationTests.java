@@ -1,4 +1,4 @@
-package fr.istic.hbmlh.videogen.VideoGen;
+package fr.istic.hbmlh.videogen;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

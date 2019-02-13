@@ -1,4 +1,4 @@
-package fr.istic.hbmlh.videogen.VideoGen;
+package fr.istic.hbmlh.videogen;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

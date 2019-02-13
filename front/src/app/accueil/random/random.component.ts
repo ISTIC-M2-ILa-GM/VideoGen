@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {VideoService} from "../../service/video.service";
 
 @Component({
   selector: 'app-random',
@@ -7,9 +8,17 @@ import {Component, OnInit} from '@angular/core';
 })
 export class RandomComponent implements OnInit {
 
-  constructor() { }
+  videoUrl: String | undefined;
+
+  constructor(private readonly videoService: VideoService) {
+  }
 
   ngOnInit() {
+    // Demande la génération de la video avec un tableau vide pour signifier une video aléatoire
+    this.videoService.generateVideo([]).then(it =>
+      this.videoUrl = it.value
+    );
   }
+
 
 }

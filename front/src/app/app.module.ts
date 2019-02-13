@@ -5,12 +5,14 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {RandomComponent} from "./accueil/random/random.component";
 import {ConfiguratorComponent} from "./accueil/configurator/configurator.component";
+import {VideoComponent} from "./accueil/video/video.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     RandomComponent,
-    ConfiguratorComponent
+    ConfiguratorComponent,
+    VideoComponent
   ],
   imports: [
     BrowserModule,

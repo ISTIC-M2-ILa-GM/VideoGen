@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {VideoService} from "../../service/video.service";
 
 @Component({
   selector: 'app-configurator',
@@ -7,9 +8,12 @@ import {Component, OnInit} from '@angular/core';
 })
 export class ConfiguratorComponent implements OnInit {
 
-  constructor() { }
+  constructor(private readonly videoService: VideoService) {
+  }
 
   ngOnInit() {
+    this.videoService.getVideoGen()
+      .then(it => console.log('TODO preparer forumlaire', it));
   }
 
 }
