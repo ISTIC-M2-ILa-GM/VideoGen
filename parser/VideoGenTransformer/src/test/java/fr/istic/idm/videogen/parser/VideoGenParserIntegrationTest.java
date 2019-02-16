@@ -327,4 +327,75 @@ public class VideoGenParserIntegrationTest {
         assertThat(parsedMedias.get(3).isActive(), equalTo(false));
         assertThat(parsedMedias.get(4).isActive(), equalTo(true));
     }
+
+    @Test
+    public void shouldParseMandatoryAndAlternatives() {
+
+        VideoGenParser videoGenParser = videoGenParserFactory.create("target/test-classes/mandatoryAlternatives.videogen");
+
+        List<List<ParsedMedia>> parse = videoGenParser.parse();
+
+        assertThat(parse, notNullValue());
+        assertThat(parse, hasSize(6));
+
+        List<ParsedMedia> parsedMedias = parse.get(0);
+        assertThat(parsedMedias, hasSize(7));
+        assertThat(parsedMedias.get(0).isActive(), equalTo(true));
+        assertThat(parsedMedias.get(1).isActive(), equalTo(true));
+        assertThat(parsedMedias.get(2).isActive(), equalTo(false));
+        assertThat(parsedMedias.get(3).isActive(), equalTo(true));
+        assertThat(parsedMedias.get(4).isActive(), equalTo(true));
+        assertThat(parsedMedias.get(5).isActive(), equalTo(false));
+        assertThat(parsedMedias.get(6).isActive(), equalTo(false));
+
+        parsedMedias = parse.get(1);
+        assertThat(parsedMedias, hasSize(7));
+        assertThat(parsedMedias.get(0).isActive(), equalTo(true));
+        assertThat(parsedMedias.get(1).isActive(), equalTo(false));
+        assertThat(parsedMedias.get(2).isActive(), equalTo(true));
+        assertThat(parsedMedias.get(3).isActive(), equalTo(true));
+        assertThat(parsedMedias.get(4).isActive(), equalTo(true));
+        assertThat(parsedMedias.get(5).isActive(), equalTo(false));
+        assertThat(parsedMedias.get(6).isActive(), equalTo(false));
+
+        parsedMedias = parse.get(2);
+        assertThat(parsedMedias, hasSize(7));
+        assertThat(parsedMedias.get(0).isActive(), equalTo(true));
+        assertThat(parsedMedias.get(1).isActive(), equalTo(true));
+        assertThat(parsedMedias.get(2).isActive(), equalTo(false));
+        assertThat(parsedMedias.get(3).isActive(), equalTo(true));
+        assertThat(parsedMedias.get(4).isActive(), equalTo(false));
+        assertThat(parsedMedias.get(5).isActive(), equalTo(true));
+        assertThat(parsedMedias.get(6).isActive(), equalTo(false));
+
+        parsedMedias = parse.get(3);
+        assertThat(parsedMedias, hasSize(7));
+        assertThat(parsedMedias.get(0).isActive(), equalTo(true));
+        assertThat(parsedMedias.get(1).isActive(), equalTo(false));
+        assertThat(parsedMedias.get(2).isActive(), equalTo(true));
+        assertThat(parsedMedias.get(3).isActive(), equalTo(true));
+        assertThat(parsedMedias.get(4).isActive(), equalTo(false));
+        assertThat(parsedMedias.get(5).isActive(), equalTo(true));
+        assertThat(parsedMedias.get(6).isActive(), equalTo(false));
+
+        parsedMedias = parse.get(4);
+        assertThat(parsedMedias, hasSize(7));
+        assertThat(parsedMedias.get(0).isActive(), equalTo(true));
+        assertThat(parsedMedias.get(1).isActive(), equalTo(true));
+        assertThat(parsedMedias.get(2).isActive(), equalTo(false));
+        assertThat(parsedMedias.get(3).isActive(), equalTo(true));
+        assertThat(parsedMedias.get(4).isActive(), equalTo(false));
+        assertThat(parsedMedias.get(5).isActive(), equalTo(false));
+        assertThat(parsedMedias.get(6).isActive(), equalTo(true));
+
+        parsedMedias = parse.get(5);
+        assertThat(parsedMedias, hasSize(7));
+        assertThat(parsedMedias.get(0).isActive(), equalTo(true));
+        assertThat(parsedMedias.get(1).isActive(), equalTo(false));
+        assertThat(parsedMedias.get(2).isActive(), equalTo(true));
+        assertThat(parsedMedias.get(3).isActive(), equalTo(true));
+        assertThat(parsedMedias.get(4).isActive(), equalTo(false));
+        assertThat(parsedMedias.get(5).isActive(), equalTo(false));
+        assertThat(parsedMedias.get(6).isActive(), equalTo(true));
+    }
 }
