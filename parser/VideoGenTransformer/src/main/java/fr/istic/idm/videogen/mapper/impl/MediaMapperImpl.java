@@ -9,6 +9,7 @@ import fr.istic.idm.videogen.model.MediaType;
 import fr.istic.idm.videogen.model.ParsedMedia;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,30 +30,29 @@ public class MediaMapperImpl implements MediaMapper {
         return parsedMedias;
     }
 
-    @Override
-    public List<ParsedMedia> toParsedMedias(List<Media> media) {
-        return new ArrayList<>();
-    }
-
     private ParsedMedia mandatoryMediaToParsedMedia(MandatoryMedia media) {
-        return media != null ? ParsedMedia.builder()
-                .type(MediaType.MANDATORY)
-                .fileName(media.getDescription().getLocation())
-                .active(true)
-                .build() : null;
+        return media != null ?
+                ParsedMedia.builder()
+                        .type(MediaType.MANDATORY)
+                        .fileName(media.getDescription().getLocation())
+                        .active(true)
+                        .build()
+                : null;
     }
 
     private ParsedMedia optionalMediaToParsedMedia(OptionalMedia media) {
-        return media != null ? ParsedMedia.builder()
-                .type(MediaType.OPTIONAL)
-                .fileName(media.getDescription().getLocation())
-                .active(false)
-                .build() : null;
+        return media != null ?
+                ParsedMedia.builder()
+                        .type(MediaType.OPTIONAL)
+                        .fileName(media.getDescription().getLocation())
+                        .active(false)
+                        .build()
+                : null;
     }
 
     private List<ParsedMedia> alternativeMediaToParsedMedia(AlternativesMedia media) {
         if (media == null) {
-            return null;
+            return new ArrayList<>();
         }
         int size = media.getMedias().size();
         return media.getMedias().stream().map(m ->
@@ -63,5 +63,15 @@ public class MediaMapperImpl implements MediaMapper {
                         .totalAlternative(size)
                         .build())
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ParsedMedia> toParsedMedias(List<Media> media) {
+        return media != null ?
+                media.stream()
+                        .map(this::toParsedMedia)
+                        .flatMap(Collection::stream)
+                        .collect(Collectors.toList())
+                : new ArrayList<>();
     }
 }

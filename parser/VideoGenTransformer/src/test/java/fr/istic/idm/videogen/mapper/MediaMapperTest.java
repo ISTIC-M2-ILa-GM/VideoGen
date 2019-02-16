@@ -14,9 +14,9 @@ import fr.istic.idm.videogen.model.ParsedMedia;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
@@ -103,5 +103,36 @@ public class MediaMapperTest {
     @Test
     public void shouldMapANullListOfMedia() {
         assertThat(mediaMapper.toParsedMedias(null), empty());
+    }
+
+    @Test
+    public void shouldMapAListOfMedia() {
+
+        MediaDescriptionImpl mediaDescription1 = new MediaDescriptionImpl();
+        mediaDescription1.setLocation("1");
+        MediaDescriptionImpl mediaDescription2 = new MediaDescriptionImpl();
+        mediaDescription2.setLocation("2");
+        AlternativesMedia media = new AlternativesMediaImpl();
+        media.getMedias().add(mediaDescription1);
+        media.getMedias().add(mediaDescription2);
+
+        OptionalMedia optionalMedia = new OptionalMediaImpl();
+        optionalMedia.setDescription(new MediaDescriptionImpl());
+        optionalMedia.getDescription().setLocation("location");
+
+        MandatoryMedia mandatoryMedia = new MandatoryMediaImpl();
+        mandatoryMedia.setDescription(new MediaDescriptionImpl());
+        mandatoryMedia.getDescription().setLocation("location");
+
+        List<Media> medias = asList(media, optionalMedia, mandatoryMedia);
+
+        List<ParsedMedia> parsedMedia = mediaMapper.toParsedMedias(medias);
+
+        assertThat(parsedMedia, notNullValue());
+        assertThat(parsedMedia, hasSize(4));
+        assertThat(parsedMedia.get(0).getType(), equalTo(MediaType.ALTERNATIVE));
+        assertThat(parsedMedia.get(1).getType(), equalTo(MediaType.ALTERNATIVE));
+        assertThat(parsedMedia.get(2).getType(), equalTo(MediaType.OPTIONAL));
+        assertThat(parsedMedia.get(3).getType(), equalTo(MediaType.MANDATORY));
     }
 }
