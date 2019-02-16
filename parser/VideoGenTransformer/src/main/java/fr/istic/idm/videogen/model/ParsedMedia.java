@@ -7,6 +7,6 @@ public class ParsedMedia {
 
     private String fileName;
     private boolean active;
-    private String type;
+    private MediaType type;
     private int totalAlternative;
 }

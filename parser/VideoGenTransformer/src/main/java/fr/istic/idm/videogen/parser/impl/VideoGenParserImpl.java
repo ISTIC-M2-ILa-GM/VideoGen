@@ -6,6 +6,7 @@ import fr.istic.idm.videogen.generated.videoGen.Media;
 import fr.istic.idm.videogen.generated.videoGen.MediaDescription;
 import fr.istic.idm.videogen.generated.videoGen.OptionalMedia;
 import fr.istic.idm.videogen.generated.videoGen.VideoGeneratorModel;
+import fr.istic.idm.videogen.model.MediaType;
 import fr.istic.idm.videogen.model.ParsedMedia;
 import fr.istic.idm.videogen.model.ParsedMediaList;
 import fr.istic.idm.videogen.parser.VideoGenParser;
@@ -32,8 +33,8 @@ public class VideoGenParserImpl implements VideoGenParser {
                 .map(m -> (OptionalMedia) m).collect(Collectors.toList());
         int alternatives = alternativesMedias.size();
         int totalAlternatives = alternativesMedias.stream().map(m -> m.getMedias().size()).reduce((i1, i2) -> i1 + i2).orElse(0);
-        int totalOptionals = optionals.size() * 2;
-        int occurence = totalOptionals * totalAlternatives + 1;
+        int totalOptionals = (int) Math.pow(2, optionals.size());
+        int occurence = totalOptionals * (totalAlternatives + 1);
 
         for (int i = 0; i < occurence; i++) {
             ParsedMediaList parsedMediaList = new ParsedMediaList();
@@ -45,11 +46,11 @@ public class VideoGenParserImpl implements VideoGenParser {
         double totalOptionalFactor = Math.pow(2, totalOptionals);
         for (int i = 0; i < optionals.size(); i++) {
             double diff = Math.pow(2, (i + 1));
-            for (int j = 0; j <= occurence; j++) {
+            for (int j = 0; j < occurence; j++) {
                 ParsedMediaList parsedMediaList = parsedMediaLists.get(j); // voir nb d'elements
                 if (j % diff >= diff / 2) {
                     List<ParsedMedia> parsedMedias = parsedMediaList.getParsedMedias().stream()
-                            .filter(m -> "OptionalMedia".equals(m.getType())).collect(Collectors.toList());
+                            .filter(m -> MediaType.OPTIONAL.equals(m.getType())).collect(Collectors.toList());
                     parsedMedias.get(i).setActive(true);
                 }
 //				for (int k = 0; k < totalAlternatives; k++) {
@@ -74,7 +75,7 @@ public class VideoGenParserImpl implements VideoGenParser {
             ParsedMedia parsedMedia = new ParsedMedia();
             parsedMedia.setActive(true);
             parsedMedia.setFileName(mandatoryMedia.getDescription().getLocation());
-            parsedMedia.setType("MandatoryMedia");
+            parsedMedia.setType(MediaType.MANDATORY);
             parsedMedias.add(parsedMedia);
         }
         if (m instanceof OptionalMedia) {
@@ -82,7 +83,7 @@ public class VideoGenParserImpl implements VideoGenParser {
             ParsedMedia parsedMedia = new ParsedMedia();
             parsedMedia.setActive(false);
             parsedMedia.setFileName(optionalMedia.getDescription().getLocation());
-            parsedMedia.setType("OptionalMedia");
+            parsedMedia.setType(MediaType.OPTIONAL);
             parsedMedias.add(parsedMedia);
         }
         if (m instanceof AlternativesMedia) {
@@ -92,7 +93,7 @@ public class VideoGenParserImpl implements VideoGenParser {
                 ParsedMedia parsedMedia = new ParsedMedia();
                 parsedMedia.setActive(false);
                 parsedMedia.setFileName(media.getLocation());
-                parsedMedia.setType("AlternativesMedia");
+                parsedMedia.setType(MediaType.ALTERNATIVE);
                 parsedMedia.setTotalAlternative(totalAlternative);
                 parsedMedias.add(parsedMedia);
 
