@@ -45,7 +45,7 @@ public class OptionalMediaImpl extends MediaImpl implements OptionalMedia
    * <!-- end-user-doc -->
    * @generated
    */
-  protected OptionalMediaImpl()
+  public OptionalMediaImpl()
   {
     super();
   }

@@ -45,7 +45,7 @@ public class MandatoryMediaImpl extends MediaImpl implements MandatoryMedia
    * <!-- end-user-doc -->
    * @generated
    */
-  protected MandatoryMediaImpl()
+  public MandatoryMediaImpl()
   {
     super();
   }

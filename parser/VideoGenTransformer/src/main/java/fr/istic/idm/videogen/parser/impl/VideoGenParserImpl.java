@@ -96,7 +96,6 @@ public class VideoGenParserImpl implements VideoGenParser {
                 parsedMedia.setType(MediaType.ALTERNATIVE);
                 parsedMedia.setTotalAlternative(totalAlternative);
                 parsedMedias.add(parsedMedia);
-
             }
         }
         return parsedMedias;

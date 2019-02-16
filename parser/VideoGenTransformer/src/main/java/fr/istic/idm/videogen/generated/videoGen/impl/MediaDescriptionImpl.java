@@ -53,7 +53,7 @@ public class MediaDescriptionImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  protected MediaDescriptionImpl()
+  public MediaDescriptionImpl()
   {
     super();
   }

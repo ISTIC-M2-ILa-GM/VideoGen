@@ -73,7 +73,7 @@ public class AlternativesMediaImpl extends MediaImpl implements AlternativesMedi
    * <!-- end-user-doc -->
    * @generated
    */
-  protected AlternativesMediaImpl()
+  public AlternativesMediaImpl()
   {
     super();
   }
