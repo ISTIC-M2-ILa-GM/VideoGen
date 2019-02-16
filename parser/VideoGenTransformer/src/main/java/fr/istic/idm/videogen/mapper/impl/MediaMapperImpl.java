@@ -7,13 +7,14 @@ import fr.istic.idm.videogen.generated.videoGen.OptionalMedia;
 import fr.istic.idm.videogen.mapper.MediaMapper;
 import fr.istic.idm.videogen.model.MediaType;
 import fr.istic.idm.videogen.model.ParsedMedia;
+import lombok.Data;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class MediaMapperImpl implements MediaMapper {
+
+    private PreviousAlternatives previousAlternative = new PreviousAlternatives();
 
     @Override
     public List<ParsedMedia> toParsedMedia(Media media) {
@@ -25,7 +26,9 @@ public class MediaMapperImpl implements MediaMapper {
             parsedMedias.add(optionalMediaToParsedMedia((OptionalMedia) media));
         }
         if (media instanceof AlternativesMedia) {
-            parsedMedias.addAll(alternativeMediaToParsedMedia((AlternativesMedia) media));
+            List<ParsedMedia> parsedMedia = alternativeMediaToParsedMedia((AlternativesMedia) media);
+            previousAlternative.add(parsedMedia.size());
+            parsedMedias.addAll(parsedMedia);
         }
         return parsedMedias;
     }
@@ -55,23 +58,40 @@ public class MediaMapperImpl implements MediaMapper {
             return new ArrayList<>();
         }
         int size = media.getMedias().size();
-        return media.getMedias().stream().map(m ->
-                ParsedMedia.builder()
-                        .active(false)
-                        .fileName(m.getLocation())
-                        .type(MediaType.ALTERNATIVE)
-                        .totalAlternative(size)
-                        .build())
-                .collect(Collectors.toList());
+        List<ParsedMedia> parsedMedia = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            parsedMedia.add(ParsedMedia.builder()
+                    .active(false)
+                    .fileName(media.getMedias().get(i).getLocation())
+                    .type(MediaType.ALTERNATIVE)
+                    .previousAlternatives(previousAlternative.getTotal())
+                    .index(i)
+                    .totalAlternative(size)
+                    .build());
+        }
+        return parsedMedia;
     }
 
     @Override
     public List<ParsedMedia> toParsedMedias(List<Media> media) {
-        return media != null ?
-                media.stream()
-                        .map(this::toParsedMedia)
-                        .flatMap(Collection::stream)
-                        .collect(Collectors.toList())
-                : new ArrayList<>();
+        if (media == null) {
+            return new ArrayList<>();
+        }
+        List<ParsedMedia> parsedMedia = new ArrayList<>();
+        for (Media m : media) {
+            parsedMedia.addAll(toParsedMedia(m));
+        }
+        previousAlternative = new PreviousAlternatives();
+        return parsedMedia;
+    }
+
+    @Data
+    private class PreviousAlternatives {
+
+        private int total = 1;
+
+        public void add(int n) {
+            total *= n;
+        }
     }
 }

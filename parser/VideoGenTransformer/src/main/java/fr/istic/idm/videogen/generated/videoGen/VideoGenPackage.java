@@ -86,7 +86,7 @@ public interface VideoGenPackage extends EPackage
   int VIDEO_GENERATOR_MODEL__MEDIAS = 1;
 
   /**
-   * The number of structural features of the '<em>Video Generator Model</em>' class.
+   * The total of structural features of the '<em>Video Generator Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -132,7 +132,7 @@ public interface VideoGenPackage extends EPackage
   int VIDEO_GEN_INFORMATION__CREATION_DATE = 2;
 
   /**
-   * The number of structural features of the '<em>Information</em>' class.
+   * The total of structural features of the '<em>Information</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -151,7 +151,7 @@ public interface VideoGenPackage extends EPackage
   int MEDIA = 2;
 
   /**
-   * The number of structural features of the '<em>Media</em>' class.
+   * The total of structural features of the '<em>Media</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -179,7 +179,7 @@ public interface VideoGenPackage extends EPackage
   int MANDATORY_MEDIA__DESCRIPTION = MEDIA_FEATURE_COUNT + 0;
 
   /**
-   * The number of structural features of the '<em>Mandatory Media</em>' class.
+   * The total of structural features of the '<em>Mandatory Media</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -207,7 +207,7 @@ public interface VideoGenPackage extends EPackage
   int OPTIONAL_MEDIA__DESCRIPTION = MEDIA_FEATURE_COUNT + 0;
 
   /**
-   * The number of structural features of the '<em>Optional Media</em>' class.
+   * The total of structural features of the '<em>Optional Media</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -244,7 +244,7 @@ public interface VideoGenPackage extends EPackage
   int ALTERNATIVES_MEDIA__MEDIAS = MEDIA_FEATURE_COUNT + 1;
 
   /**
-   * The number of structural features of the '<em>Alternatives Media</em>' class.
+   * The total of structural features of the '<em>Alternatives Media</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -272,7 +272,7 @@ public interface VideoGenPackage extends EPackage
   int MEDIA_DESCRIPTION__LOCATION = 0;
 
   /**
-   * The number of structural features of the '<em>Media Description</em>' class.
+   * The total of structural features of the '<em>Media Description</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -327,7 +327,7 @@ public interface VideoGenPackage extends EPackage
   int IMAGE_DESCRIPTION__BOTTOM = MEDIA_DESCRIPTION_FEATURE_COUNT + 2;
 
   /**
-   * The number of structural features of the '<em>Image Description</em>' class.
+   * The total of structural features of the '<em>Image Description</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -409,7 +409,7 @@ public interface VideoGenPackage extends EPackage
   int VIDEO_DESCRIPTION__TEXT = MEDIA_DESCRIPTION_FEATURE_COUNT + 5;
 
   /**
-   * The number of structural features of the '<em>Video Description</em>' class.
+   * The total of structural features of the '<em>Video Description</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -464,7 +464,7 @@ public interface VideoGenPackage extends EPackage
   int VIDEO_TEXT__SIZE = 3;
 
   /**
-   * The number of structural features of the '<em>Video Text</em>' class.
+   * The total of structural features of the '<em>Video Text</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -483,7 +483,7 @@ public interface VideoGenPackage extends EPackage
   int FILTER = 10;
 
   /**
-   * The number of structural features of the '<em>Filter</em>' class.
+   * The total of structural features of the '<em>Filter</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -502,7 +502,7 @@ public interface VideoGenPackage extends EPackage
   int BLACK_WHITE_FILTER = 11;
 
   /**
-   * The number of structural features of the '<em>Black White Filter</em>' class.
+   * The total of structural features of the '<em>Black White Filter</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -521,7 +521,7 @@ public interface VideoGenPackage extends EPackage
   int NEGATE_FILTER = 12;
 
   /**
-   * The number of structural features of the '<em>Negate Filter</em>' class.
+   * The total of structural features of the '<em>Negate Filter</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -549,7 +549,7 @@ public interface VideoGenPackage extends EPackage
   int FLIP_FILTER__ORIENTATION = FILTER_FEATURE_COUNT + 0;
 
   /**
-   * The number of structural features of the '<em>Flip Filter</em>' class.
+   * The total of structural features of the '<em>Flip Filter</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated

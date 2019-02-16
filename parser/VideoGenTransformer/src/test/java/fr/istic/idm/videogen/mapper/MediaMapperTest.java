@@ -91,10 +91,12 @@ public class MediaMapperTest {
         assertThat(parsedMedias, notNullValue());
         assertThat(parsedMedias, hasSize(2));
         assertThat(parsedMedias.get(0).getTotalAlternative(), equalTo(2));
+        assertThat(parsedMedias.get(0).getIndex(), equalTo(0));
         assertThat(parsedMedias.get(0).getFileName(), equalTo("1"));
         assertThat(parsedMedias.get(0).getType(), equalTo(MediaType.ALTERNATIVE));
         assertThat(parsedMedias.get(0).isActive(), equalTo(false));
         assertThat(parsedMedias.get(1).getTotalAlternative(), equalTo(2));
+        assertThat(parsedMedias.get(1).getIndex(), equalTo(1));
         assertThat(parsedMedias.get(1).getFileName(), equalTo("2"));
         assertThat(parsedMedias.get(1).getType(), equalTo(MediaType.ALTERNATIVE));
         assertThat(parsedMedias.get(1).isActive(), equalTo(false));
@@ -108,31 +110,35 @@ public class MediaMapperTest {
     @Test
     public void shouldMapAListOfMedia() {
 
-        MediaDescriptionImpl mediaDescription1 = new MediaDescriptionImpl();
-        mediaDescription1.setLocation("1");
-        MediaDescriptionImpl mediaDescription2 = new MediaDescriptionImpl();
-        mediaDescription2.setLocation("2");
-        AlternativesMedia media = new AlternativesMediaImpl();
-        media.getMedias().add(mediaDescription1);
-        media.getMedias().add(mediaDescription2);
+        AlternativesMedia alternative1 = new AlternativesMediaImpl();
+        alternative1.getMedias().add(new MediaDescriptionImpl());
+        alternative1.getMedias().add(new MediaDescriptionImpl());
+
+        AlternativesMedia alternative2 = new AlternativesMediaImpl();
+        alternative2.getMedias().add(new MediaDescriptionImpl());
+        alternative2.getMedias().add(new MediaDescriptionImpl());
 
         OptionalMedia optionalMedia = new OptionalMediaImpl();
         optionalMedia.setDescription(new MediaDescriptionImpl());
-        optionalMedia.getDescription().setLocation("location");
 
         MandatoryMedia mandatoryMedia = new MandatoryMediaImpl();
         mandatoryMedia.setDescription(new MediaDescriptionImpl());
-        mandatoryMedia.getDescription().setLocation("location");
 
-        List<Media> medias = asList(media, optionalMedia, mandatoryMedia);
+        List<Media> medias = asList(alternative1, alternative2, optionalMedia, mandatoryMedia);
 
         List<ParsedMedia> parsedMedia = mediaMapper.toParsedMedias(medias);
 
         assertThat(parsedMedia, notNullValue());
-        assertThat(parsedMedia, hasSize(4));
+        assertThat(parsedMedia, hasSize(6));
         assertThat(parsedMedia.get(0).getType(), equalTo(MediaType.ALTERNATIVE));
+        assertThat(parsedMedia.get(0).getPreviousAlternatives(), equalTo(1));
         assertThat(parsedMedia.get(1).getType(), equalTo(MediaType.ALTERNATIVE));
-        assertThat(parsedMedia.get(2).getType(), equalTo(MediaType.OPTIONAL));
-        assertThat(parsedMedia.get(3).getType(), equalTo(MediaType.MANDATORY));
+        assertThat(parsedMedia.get(1).getPreviousAlternatives(), equalTo(1));
+        assertThat(parsedMedia.get(2).getType(), equalTo(MediaType.ALTERNATIVE));
+        assertThat(parsedMedia.get(2).getPreviousAlternatives(), equalTo(2));
+        assertThat(parsedMedia.get(3).getType(), equalTo(MediaType.ALTERNATIVE));
+        assertThat(parsedMedia.get(3).getPreviousAlternatives(), equalTo(2));
+        assertThat(parsedMedia.get(4).getType(), equalTo(MediaType.OPTIONAL));
+        assertThat(parsedMedia.get(5).getType(), equalTo(MediaType.MANDATORY));
     }
 }

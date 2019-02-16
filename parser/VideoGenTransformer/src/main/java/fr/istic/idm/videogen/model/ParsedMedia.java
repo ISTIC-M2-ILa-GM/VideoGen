@@ -14,5 +14,7 @@ public class ParsedMedia {
     private String fileName;
     private boolean active;
     private MediaType type;
+    private int previousAlternatives;
     private int totalAlternative;
+    private int index;
 }

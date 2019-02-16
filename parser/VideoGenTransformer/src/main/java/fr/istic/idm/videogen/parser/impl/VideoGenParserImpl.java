@@ -1,6 +1,7 @@
 package fr.istic.idm.videogen.parser.impl;
 
 import fr.istic.idm.videogen.generated.videoGen.AlternativesMedia;
+import fr.istic.idm.videogen.generated.videoGen.MandatoryMedia;
 import fr.istic.idm.videogen.generated.videoGen.OptionalMedia;
 import fr.istic.idm.videogen.generated.videoGen.VideoGeneratorModel;
 import fr.istic.idm.videogen.mapper.MediaMapper;
@@ -17,46 +18,59 @@ import java.util.stream.Collectors;
 public class VideoGenParserImpl implements VideoGenParser {
 
     private VideoGeneratorModel videoGeneratorModel;
+
     private MediaMapper mediaMapper;
 
     public List<List<ParsedMedia>> parse() {
 
-        List<AlternativesMedia> alternativesMedias = videoGeneratorModel.getMedias().stream()
-                .filter(m -> m instanceof AlternativesMedia).map(m -> (AlternativesMedia) m)
-                .collect(Collectors.toList());
-        List<OptionalMedia> optionals = videoGeneratorModel.getMedias().stream().filter(m -> m instanceof OptionalMedia)
-                .map(m -> (OptionalMedia) m).collect(Collectors.toList());
-        int alternatives = alternativesMedias.size();
-        int totalAlternatives = alternativesMedias.stream().map(m -> m.getMedias().size()).reduce((i1, i2) -> i1 + i2).orElse(0);
+        List<AlternativesMedia> alternatives = videoGeneratorModel.getMedias().stream().filter(m -> m instanceof AlternativesMedia).map(m -> (AlternativesMedia) m).collect(Collectors.toList());
+        List<OptionalMedia> optionals = videoGeneratorModel.getMedias().stream().filter(m -> m instanceof OptionalMedia).map(m -> (OptionalMedia) m).collect(Collectors.toList());
+        int totalAlternatives = alternatives.stream().map(m -> m.getMedias().size()).filter(s -> s != 0).reduce((i1, i2) -> i1 * i2).orElse(0);
+        int totalAlternativeMedia = alternatives.stream().map(m -> m.getMedias().size()).filter(s -> s != 0).reduce((i1, i2) -> i1 + i2).orElse(0);
         int totalOptionals = (int) Math.pow(2, optionals.size());
-        int occurence = totalOptionals * (totalAlternatives + 1);
+        //TODO refactor useless total calculation ...
+        int total;
+        if (totalOptionals == 0 && totalAlternatives == 0) {
+            total = 1;
+        } else if (totalAlternatives == 0) {
+            total = totalOptionals;
+        } else {
+            total = totalOptionals * totalAlternatives;
+        }
 
-        List<List<ParsedMedia>> parsedMediaLists = generateOccurence(occurence);
-        double totalOptionalFactor = Math.pow(2, totalOptionals);
+        List<List<ParsedMedia>> parsedMediaLists = generateMediaLists(total);
         for (int i = 0; i < optionals.size(); i++) {
             double optionalIndex = Math.pow(2, (i + 1));
-            for (int j = 0; j < occurence; j++) {
+            for (int j = 0; j < total; j++) {
+                List<ParsedMedia> p = parsedMediaLists.get(j);
                 if (j % optionalIndex >= optionalIndex / 2) {
-                    List<ParsedMedia> parsedMedias = parsedMediaLists.get(j).stream()
-                            .filter(m -> MediaType.OPTIONAL.equals(m.getType())).collect(Collectors.toList());
+                    List<ParsedMedia> parsedMedias = filter(p, MediaType.OPTIONAL);
                     parsedMedias.get(i).setActive(true);
                 }
-//				for (int k = 0; k < totalAlternatives; k++) {
-//					List<ParsedMedia> parsedMedias = parsedMediaList.getParsedMedias().stream()
-//							.filter(m -> "AlternativesMedia".equals(m.getType())).collect(Collectors.toList());
-//					ParsedMedia parsedMedia = parsedMedias.get(k);
-//					double altFactor = totalOptionalFactor * Math.pow(parsedMedia.getTotalAlternative(), k + 1);
-//					if (j % altFactor >= altFactor / parsedMedia.getTotalAlternative()) {
-//						parsedMedia.setActive(true);
-//					}
-//				}
+            }
+        }
+        for (int k = 0; k < totalAlternativeMedia; k++) {
+            for (int j = 0; j < total; j++) {
+                List<ParsedMedia> p = parsedMediaLists.get(j);
+                List<ParsedMedia> parsedMedias = filter(p, MediaType.ALTERNATIVE);
+                ParsedMedia parsedMedia = parsedMedias.get(k);
+                int previousIndex = parsedMedia.getPreviousAlternatives() * parsedMedia.getIndex();
+                int currentIndex = parsedMedia.getPreviousAlternatives() * (parsedMedia.getIndex() + 1);
+                int nextIndex = parsedMedia.getPreviousAlternatives() * parsedMedia.getTotalAlternative();
+                if (j % nextIndex < currentIndex && j % nextIndex >= previousIndex) {
+                    parsedMedia.setActive(true);
+                }
             }
         }
 
         return parsedMediaLists;
     }
 
-    private List<List<ParsedMedia>> generateOccurence(int occurence) {
+    private List<ParsedMedia> filter(List<ParsedMedia> p, MediaType type) {
+        return p.stream().filter(m -> type.equals(m.getType())).collect(Collectors.toList());
+    }
+
+    private List<List<ParsedMedia>> generateMediaLists(int occurence) {
         List<List<ParsedMedia>> parsedMediaLists = new ArrayList<>();
         for (int i = 0; i < occurence; i++) {
             parsedMediaLists.add(mediaMapper.toParsedMedias(videoGeneratorModel.getMedias()));
