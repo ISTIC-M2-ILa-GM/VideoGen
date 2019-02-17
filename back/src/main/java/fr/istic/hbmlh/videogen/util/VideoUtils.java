@@ -45,7 +45,7 @@ public class VideoUtils {
 
         try {
             final Process p = Runtime.getRuntime().exec(command);
-            p.waitFor();
+            final int result= p.waitFor();
 
             inputStream = p.getInputStream();
 
@@ -70,6 +70,7 @@ public class VideoUtils {
     }
 
     public static String generateGifCommandLine(final String videoPath) {
+
         return null;
     }
 }
