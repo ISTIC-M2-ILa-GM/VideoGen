@@ -1,7 +1,6 @@
 package fr.istic.idm.videogen.parser.impl;
 
 import fr.istic.idm.videogen.generated.videoGen.AlternativesMedia;
-import fr.istic.idm.videogen.generated.videoGen.MandatoryMedia;
 import fr.istic.idm.videogen.generated.videoGen.OptionalMedia;
 import fr.istic.idm.videogen.generated.videoGen.VideoGeneratorModel;
 import fr.istic.idm.videogen.mapper.MediaMapper;
@@ -23,12 +22,12 @@ public class VideoGenParserImpl implements VideoGenParser {
 
     public List<List<ParsedMedia>> parse() {
 
+        //TODO refactor useless total/alternatives/optionales calculation ...
         List<AlternativesMedia> alternatives = videoGeneratorModel.getMedias().stream().filter(m -> m instanceof AlternativesMedia).map(m -> (AlternativesMedia) m).collect(Collectors.toList());
         List<OptionalMedia> optionals = videoGeneratorModel.getMedias().stream().filter(m -> m instanceof OptionalMedia).map(m -> (OptionalMedia) m).collect(Collectors.toList());
         int totalAlternatives = alternatives.stream().map(m -> m.getMedias().size()).filter(s -> s != 0).reduce((i1, i2) -> i1 * i2).orElse(0);
         int totalAlternativeMedia = alternatives.stream().map(m -> m.getMedias().size()).filter(s -> s != 0).reduce((i1, i2) -> i1 + i2).orElse(0);
         int totalOptionals = (int) Math.pow(2, optionals.size());
-        //TODO refactor useless total calculation ...
         int total;
         if (totalOptionals == 0 && totalAlternatives == 0) {
             total = 1;
@@ -39,24 +38,22 @@ public class VideoGenParserImpl implements VideoGenParser {
         }
 
         List<List<ParsedMedia>> parsedMediaLists = generateMediaLists(total);
-        for (int i = 0; i < optionals.size(); i++) {
-            double optionalIndex = Math.pow(2, (i + 1));
-            for (int j = 0; j < total; j++) {
+        for (int j = 0; j < total; j++) {
+            for (int i = 0; i < optionals.size(); i++) {
+                double optionalIndex = Math.pow(2, (i + 1));
                 List<ParsedMedia> p = parsedMediaLists.get(j);
                 if (j % optionalIndex >= optionalIndex / 2) {
                     List<ParsedMedia> parsedMedias = filter(p, MediaType.OPTIONAL);
                     parsedMedias.get(i).setActive(true);
                 }
             }
-        }
-        for (int k = 0; k < totalAlternativeMedia; k++) {
-            for (int j = 0; j < total; j++) {
+            for (int k = 0; k < totalAlternativeMedia; k++) {
                 List<ParsedMedia> p = parsedMediaLists.get(j);
                 List<ParsedMedia> parsedMedias = filter(p, MediaType.ALTERNATIVE);
                 ParsedMedia parsedMedia = parsedMedias.get(k);
-                int previousIndex = parsedMedia.getPreviousAlternatives() * parsedMedia.getIndex();
-                int currentIndex = parsedMedia.getPreviousAlternatives() * (parsedMedia.getIndex() + 1);
-                int nextIndex = parsedMedia.getPreviousAlternatives() * parsedMedia.getTotalAlternative();
+                int previousIndex = parsedMedia.getPreviousAlternatives() * parsedMedia.getIndex() * totalOptionals;
+                int currentIndex = parsedMedia.getPreviousAlternatives() * (parsedMedia.getIndex() + 1) * totalOptionals;
+                int nextIndex = parsedMedia.getPreviousAlternatives() * parsedMedia.getTotalAlternative() * totalOptionals;
                 if (j % nextIndex < currentIndex && j % nextIndex >= previousIndex) {
                     parsedMedia.setActive(true);
                 }
