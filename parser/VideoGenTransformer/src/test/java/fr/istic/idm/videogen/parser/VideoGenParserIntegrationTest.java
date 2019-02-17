@@ -398,4 +398,27 @@ public class VideoGenParserIntegrationTest {
         assertThat(parsedMedias.get(5).isActive(), equalTo(false));
         assertThat(parsedMedias.get(6).isActive(), equalTo(true));
     }
+
+    @Test
+    public void shouldParseMandatoryAndAlternative() {
+
+        VideoGenParser videoGenParser = videoGenParserFactory.create("target/test-classes/mandatoryAlternative.videogen");
+
+        List<List<ParsedMedia>> parse = videoGenParser.parse();
+
+        assertThat(parse, notNullValue());
+        assertThat(parse, hasSize(2));
+
+        List<ParsedMedia> parsedMedias = parse.get(0);
+        assertThat(parsedMedias, hasSize(3));
+        assertThat(parsedMedias.get(0).isActive(), equalTo(true));
+        assertThat(parsedMedias.get(1).isActive(), equalTo(true));
+        assertThat(parsedMedias.get(2).isActive(), equalTo(false));
+
+        parsedMedias = parse.get(1);
+        assertThat(parsedMedias, hasSize(3));
+        assertThat(parsedMedias.get(0).isActive(), equalTo(true));
+        assertThat(parsedMedias.get(1).isActive(), equalTo(false));
+        assertThat(parsedMedias.get(2).isActive(), equalTo(true));
+    }
 }
