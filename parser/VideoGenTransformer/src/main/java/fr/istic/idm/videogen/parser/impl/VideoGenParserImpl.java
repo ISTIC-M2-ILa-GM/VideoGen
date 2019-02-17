@@ -8,6 +8,8 @@ import fr.istic.idm.videogen.model.MediaType;
 import fr.istic.idm.videogen.model.ParsedMedia;
 import fr.istic.idm.videogen.parser.VideoGenParser;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +24,21 @@ public class VideoGenParserImpl implements VideoGenParser {
 
     public List<List<ParsedMedia>> parse() {
 
-        //TODO refactor useless total/alternatives/optionales calculation ...
+        PreCalculationValues preCalculation = preCalculate();
+
+        List<List<ParsedMedia>> parsedMediaLists = generateMediaLists(preCalculation.getTotal());
+
+        for (int j = 0; j < preCalculation.getTotal(); j++) {
+            List<ParsedMedia> p = parsedMediaLists.get(j);
+            parseOptionals(preCalculation, j, filter(p, MediaType.OPTIONAL));
+            parseAlternatives(preCalculation, j, filter(p, MediaType.ALTERNATIVE));
+        }
+
+        return parsedMediaLists;
+    }
+
+    //TODO refactor useless pre calculation
+    private PreCalculationValues preCalculate() {
         List<AlternativesMedia> alternatives = videoGeneratorModel.getMedias().stream().filter(m -> m instanceof AlternativesMedia).map(m -> (AlternativesMedia) m).collect(Collectors.toList());
         List<OptionalMedia> optionals = videoGeneratorModel.getMedias().stream().filter(m -> m instanceof OptionalMedia).map(m -> (OptionalMedia) m).collect(Collectors.toList());
         int totalAlternatives = alternatives.stream().map(m -> m.getMedias().size()).filter(s -> s != 0).reduce((i1, i2) -> i1 * i2).orElse(0);
@@ -36,31 +52,7 @@ public class VideoGenParserImpl implements VideoGenParser {
         } else {
             total = totalOptionals * totalAlternatives;
         }
-
-        List<List<ParsedMedia>> parsedMediaLists = generateMediaLists(total);
-        for (int j = 0; j < total; j++) {
-            for (int i = 0; i < optionals.size(); i++) {
-                double optionalIndex = Math.pow(2, (i + 1));
-                List<ParsedMedia> p = parsedMediaLists.get(j);
-                if (j % optionalIndex >= optionalIndex / 2) {
-                    List<ParsedMedia> parsedMedias = filter(p, MediaType.OPTIONAL);
-                    parsedMedias.get(i).setActive(true);
-                }
-            }
-            for (int k = 0; k < totalAlternativeMedia; k++) {
-                List<ParsedMedia> p = parsedMediaLists.get(j);
-                List<ParsedMedia> parsedMedias = filter(p, MediaType.ALTERNATIVE);
-                ParsedMedia parsedMedia = parsedMedias.get(k);
-                int previousIndex = parsedMedia.getPreviousAlternatives() * parsedMedia.getIndex() * totalOptionals;
-                int currentIndex = parsedMedia.getPreviousAlternatives() * (parsedMedia.getIndex() + 1) * totalOptionals;
-                int nextIndex = parsedMedia.getPreviousAlternatives() * parsedMedia.getTotalAlternative() * totalOptionals;
-                if (j % nextIndex < currentIndex && j % nextIndex >= previousIndex) {
-                    parsedMedia.setActive(true);
-                }
-            }
-        }
-
-        return parsedMediaLists;
+        return PreCalculationValues.builder().total(total).alternativeSize(totalAlternativeMedia).optionalsSize(optionals.size()).optionalVariantes(totalOptionals).build();
     }
 
     private List<ParsedMedia> filter(List<ParsedMedia> p, MediaType type) {
@@ -73,5 +65,35 @@ public class VideoGenParserImpl implements VideoGenParser {
             parsedMediaLists.add(mediaMapper.toParsedMedias(videoGeneratorModel.getMedias()));
         }
         return parsedMediaLists;
+    }
+
+    private void parseOptionals(PreCalculationValues preCalculation, int index, List<ParsedMedia> optionals) {
+        for (int i = 0; i < preCalculation.getOptionalsSize(); i++) {
+            double optionalIndex = Math.pow(2, (i + 1));
+            if (index % optionalIndex >= optionalIndex / 2) {
+                optionals.get(i).setActive(true);
+            }
+        }
+    }
+
+    private void parseAlternatives(PreCalculationValues preCalculation, int j, List<ParsedMedia> alternatives) {
+        for (int k = 0; k < preCalculation.getAlternativeSize(); k++) {
+            ParsedMedia parsedMedia = alternatives.get(k);
+            int previousIndex = parsedMedia.getPreviousAlternatives() * parsedMedia.getIndex() * preCalculation.getOptionalVariantes();
+            int currentIndex = parsedMedia.getPreviousAlternatives() * (parsedMedia.getIndex() + 1) * preCalculation.getOptionalVariantes();
+            int nextIndex = parsedMedia.getPreviousAlternatives() * parsedMedia.getTotalAlternative() * preCalculation.getOptionalVariantes();
+            if (j % nextIndex < currentIndex && j % nextIndex >= previousIndex) {
+                parsedMedia.setActive(true);
+            }
+        }
+    }
+
+    @Data
+    @Builder
+    private static class PreCalculationValues {
+        private int optionalsSize;
+        private int optionalVariantes;
+        private int alternativeSize;
+        private int total;
     }
 }
