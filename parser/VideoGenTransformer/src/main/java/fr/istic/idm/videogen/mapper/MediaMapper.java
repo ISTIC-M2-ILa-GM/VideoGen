@@ -7,7 +7,5 @@ import java.util.List;
 
 public interface MediaMapper {
 
-    List<ParsedMedia> toParsedMedia(Media media);
-
     List<ParsedMedia> toParsedMedias(List<Media> media);
 }

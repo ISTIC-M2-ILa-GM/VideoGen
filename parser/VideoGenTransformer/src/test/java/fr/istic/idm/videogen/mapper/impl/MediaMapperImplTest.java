@@ -1,4 +1,4 @@
-package fr.istic.idm.videogen.mapper;
+package fr.istic.idm.videogen.mapper.impl;
 
 import fr.istic.idm.videogen.generated.videoGen.AlternativesMedia;
 import fr.istic.idm.videogen.generated.videoGen.MandatoryMedia;
@@ -8,6 +8,7 @@ import fr.istic.idm.videogen.generated.videoGen.impl.AlternativesMediaImpl;
 import fr.istic.idm.videogen.generated.videoGen.impl.MandatoryMediaImpl;
 import fr.istic.idm.videogen.generated.videoGen.impl.MediaDescriptionImpl;
 import fr.istic.idm.videogen.generated.videoGen.impl.OptionalMediaImpl;
+import fr.istic.idm.videogen.mapper.MediaMapper;
 import fr.istic.idm.videogen.mapper.impl.MediaMapperImpl;
 import fr.istic.idm.videogen.model.MediaType;
 import fr.istic.idm.videogen.model.ParsedMedia;
@@ -23,9 +24,9 @@ import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.IsNull.notNullValue;
 
-public class MediaMapperTest {
+public class MediaMapperImplTest {
 
-    private MediaMapper mediaMapper;
+    private MediaMapperImpl mediaMapper;
 
     @Before
     public void setUp() {
