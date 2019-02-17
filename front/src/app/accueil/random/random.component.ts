@@ -10,7 +10,7 @@ export class RandomComponent implements OnInit {
 
   videoUrl: String | undefined;
 
-  constructor(private readonly videoService: VideoService) {
+  constructor(private videoService: VideoService) {
   }
 
   ngOnInit() {

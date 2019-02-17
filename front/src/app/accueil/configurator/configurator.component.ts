@@ -8,12 +8,14 @@ import {VideoService} from "../../service/video.service";
 })
 export class ConfiguratorComponent implements OnInit {
 
-  constructor(private readonly videoService: VideoService) {
+  constructor(
+    private readonly videoService: VideoService
+  ) {
   }
 
   ngOnInit() {
-    this.videoService.getVideoGen()
-      .then(it => console.log('TODO preparer forumlaire', it));
+    // this.videoService.getVideoGen()
+    //   .then(it => console.log('TODO preparer forumlaire', it));
   }
 
 }
