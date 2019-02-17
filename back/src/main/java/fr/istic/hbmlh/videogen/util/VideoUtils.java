@@ -19,13 +19,15 @@ public class VideoUtils {
      * @return La commande à executer
      */
     public static String generateFfmpegConcatCommand(final List<String> videosPath, final UUID nomVideo) {
-        final String initialCommand = "ffmpeg -i \"concat:";
+        final String initialCommand = "/usr/bin/ffmpeg -i \"concat:";
 
         final String videos = videosPath.stream()
                 .reduce((a, b) -> a + "|" + b)
                 .orElse("");
 
-        final String endCommand = "\" -codec copy " + IVideoService.VIDEO_CONCAT_PATH + nomVideo + ".webm";
+        final String contanedVideo = IVideoService.VIDEO_CONCAT_PATH + nomVideo;
+
+        final String endCommand = "\" -codec copy " + contanedVideo + ".avi && ffmpeg -i " + contanedVideo + ".avi " + contanedVideo + ".webm";
 
         return initialCommand + videos + endCommand;
     }
@@ -37,7 +39,9 @@ public class VideoUtils {
      * @return
      * @throws IOException
      */
-    public static String executeCommand(String command) throws IOException {
+    public static String executeCommand(String command) throws IOException, InterruptedException {
+
+//        Runtime.getRuntime().exec(command).waitFor();
 
         final StringBuilder output = new StringBuilder();
 
@@ -45,9 +49,8 @@ public class VideoUtils {
 
         try {
             final Process p = Runtime.getRuntime().exec(command);
-            final int result= p.waitFor();
 
-            inputStream = p.getInputStream();
+            inputStream = p.getErrorStream();
 
             final BufferedReader reader =
                     new BufferedReader(new InputStreamReader(inputStream));
@@ -56,6 +59,8 @@ public class VideoUtils {
             while ((line = reader.readLine()) != null) {
                 output.append(line).append("\n");
             }
+            final int result = p.waitFor();
+            System.out.println("RESULT : " + result);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -64,6 +69,9 @@ public class VideoUtils {
                 inputStream.close();
             }
         }
+
+        System.out.println("command : " + command);
+        System.out.println(output.toString());
 
         return output.toString();
 

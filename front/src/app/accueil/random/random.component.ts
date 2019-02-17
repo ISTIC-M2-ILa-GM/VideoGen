@@ -15,7 +15,7 @@ export class RandomComponent implements OnInit {
 
   ngOnInit() {
     // Demande la génération de la video avec un tableau vide pour signifier une video aléatoire
-    this.videoService.generateVideo([]).then(it =>
+    this.videoService.generateRandomVideo().then(it =>
       this.videoUrl = it.value
     );
   }
