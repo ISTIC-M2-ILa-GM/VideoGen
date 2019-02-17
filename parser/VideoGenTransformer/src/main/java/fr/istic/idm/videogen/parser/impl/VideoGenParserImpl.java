@@ -38,18 +38,19 @@ public class VideoGenParserImpl implements VideoGenParser {
 
     //TODO refactor useless pre calculation
     private PreCalculationValues preCalculate() {
+
         List<AlternativesMedia> alternatives = videoGeneratorModel.getMedias().stream().filter(m -> m instanceof AlternativesMedia).map(m -> (AlternativesMedia) m).collect(Collectors.toList());
         List<OptionalMedia> optionals = videoGeneratorModel.getMedias().stream().filter(m -> m instanceof OptionalMedia).map(m -> (OptionalMedia) m).collect(Collectors.toList());
+
         int alternativeVariants = alternatives.stream().map(m -> m.getMedias().size()).filter(s -> s != 0).reduce((i1, i2) -> i1 * i2).orElse(0);
-        int alternativesSize = alternatives.stream().map(m -> m.getMedias().size()).filter(s -> s != 0).reduce((i1, i2) -> i1 + i2).orElse(0);
         int optionalVariants = (int) Math.pow(2, optionals.size());
-        int variants;
-        if (alternativeVariants == 0) {
-            variants = optionalVariants;
-        } else {
-            variants = optionalVariants * alternativeVariants;
-        }
-        return PreCalculationValues.builder().variants(variants).alternativesSize(alternativesSize).optionalsSize(optionals.size()).optionalVariants(optionalVariants).build();
+
+        return PreCalculationValues.builder()
+                .variants(alternativeVariants == 0 ? optionalVariants : optionalVariants * alternativeVariants)
+                .alternativesSize(alternatives.stream().map(m -> m.getMedias().size()).filter(s -> s != 0).reduce((i1, i2) -> i1 + i2).orElse(0))
+                .optionalsSize(optionals.size())
+                .optionalVariants(optionalVariants)
+                .build();
     }
 
     private List<ParsedMedia> filter(List<ParsedMedia> parsedMedia, MediaType type) {
@@ -79,7 +80,8 @@ public class VideoGenParserImpl implements VideoGenParser {
             int previousIndex = parsedMedia.getPreviousAlternatives() * parsedMedia.getIndex() * preCalculation.getOptionalVariants();
             int currentIndex = parsedMedia.getPreviousAlternatives() * (parsedMedia.getIndex() + 1) * preCalculation.getOptionalVariants();
             int nextIndex = parsedMedia.getPreviousAlternatives() * parsedMedia.getCurrentAlternatives() * preCalculation.getOptionalVariants();
-            if (index % nextIndex < currentIndex && index % nextIndex >= previousIndex) {
+            int position = index % nextIndex;
+            if (position < currentIndex && position >= previousIndex) {
                 parsedMedia.setActive(true);
             }
         }
