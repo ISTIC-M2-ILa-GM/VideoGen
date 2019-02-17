@@ -7,9 +7,10 @@ import org.springframework.stereotype.Service
 class VideoGenParser : IVideoGenParser {
   override fun generateRandomConfiguration(): List<String> {
 
-    val avez = "/tmp/video_src/avez_vous_deja_vu.avi"
-    val intro = "/tmp/video_src/intro_lutin.avi"
+    val avez = "/tmp/titi/avez/avez_vous_deja_vu.avi"
+    val intro = "/tmp/titi/intro/intro_lutin.avi"
+    val final = "/tmp/titi/maintenant_oui/maintenant_oui.avi"
 
-    return listOf(avez, intro)
+    return listOf(avez, intro, final)
   }
 }

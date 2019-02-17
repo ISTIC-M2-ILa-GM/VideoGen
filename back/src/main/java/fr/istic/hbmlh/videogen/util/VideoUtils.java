@@ -29,7 +29,10 @@ public class VideoUtils {
 
         final String endCommand = "\" -codec copy " + contanedVideo + ".avi && ffmpeg -i " + contanedVideo + ".avi " + contanedVideo + ".webm";
 
-        return initialCommand + videos + endCommand;
+        final String fullCommand = initialCommand + videos + endCommand;
+
+        return fullCommand;
+
     }
 
     /**
@@ -40,8 +43,6 @@ public class VideoUtils {
      * @throws IOException
      */
     public static String executeCommand(String command) throws IOException, InterruptedException {
-
-//        Runtime.getRuntime().exec(command).waitFor();
 
         final StringBuilder output = new StringBuilder();
 
