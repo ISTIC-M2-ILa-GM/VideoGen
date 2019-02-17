@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import java.util.List;
 
+import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
@@ -23,6 +24,56 @@ public class VideoGenParserIntegrationTest {
     @Before
     public void setUp() {
         videoGenParserFactory = new VideoGenParserFactoryImpl(new VideoGenHelper(), new MediaMapperImpl());
+    }
+
+    @Test
+    public void shouldParseOptionalsAndAlternatives() {
+
+        VideoGenParser videoGenParser = videoGenParserFactory.create("target/test-classes/optionalsAlternatives.videogen");
+
+        List<List<ParsedMedia>> parse = videoGenParser.parse();
+
+        boolean[][] expectedValues = new boolean[][]{
+                new boolean[]{false, true, false, false, true, false, false},
+                new boolean[]{true, true, false, false, true, false, false},
+                new boolean[]{false, true, false, true, true, false, false},
+                new boolean[]{true, true, false, true, true, false, false},
+                new boolean[]{false, false, true, false, true, false, false},
+                new boolean[]{true, false, true, false, true, false, false},
+                new boolean[]{false, false, true, true, true, false, false},
+                new boolean[]{true, false, true, true, true, false, false},
+                new boolean[]{false, true, false, false, false, true, false},
+                new boolean[]{true, true, false, false, false, true, false},
+                new boolean[]{false, true, false, true, false, true, false},
+                new boolean[]{true, true, false, true, false, true, false},
+                new boolean[]{false, false, true, false, false, true, false},
+                new boolean[]{true, false, true, false, false, true, false},
+                new boolean[]{false, false, true, true, false, true, false},
+                new boolean[]{true, false, true, true, false, true, false},
+                new boolean[]{false, true, false, false, false, false, true},
+                new boolean[]{true, true, false, false, false, false, true},
+                new boolean[]{false, true, false, true, false, false, true},
+                new boolean[]{true, true, false, true, false, false, true},
+                new boolean[]{false, false, true, false, false, false, true},
+                new boolean[]{true, false, true, false, false, false, true},
+                new boolean[]{false, false, true, true, false, false, true},
+                new boolean[]{true, false, true, true, false, false, true}
+        };
+
+        assertValues(parse, expectedValues);
+    }
+
+    private void assertValues(List<List<ParsedMedia>> parse, boolean[][] expectedValues) {
+        assertThat(parse, notNullValue());
+        assertThat(parse, hasSize(expectedValues.length));
+        for (int i = 0; i < expectedValues.length; i++) {
+            assertThat(String.format("The index %s has wrong length", i), parse.get(i).size(), equalTo(expectedValues[i].length));
+            assertThat(String.format("The index %s has wrong values", i), mapToActive(parse.get(i)), equalTo(expectedValues[i]));
+        }
+    }
+
+    private Object[] mapToActive(List<ParsedMedia> parsedMedias) {
+        return parsedMedias.stream().map(ParsedMedia::isActive).toArray();
     }
 
     @Test
