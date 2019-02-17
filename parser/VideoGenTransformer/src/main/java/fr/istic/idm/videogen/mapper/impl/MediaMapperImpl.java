@@ -66,7 +66,7 @@ public class MediaMapperImpl implements MediaMapper {
                     .type(MediaType.ALTERNATIVE)
                     .previousAlternatives(previousAlternative.getTotal())
                     .index(i)
-                    .totalAlternative(size)
+                    .currentAlternatives(size)
                     .build());
         }
         return parsedMedia;

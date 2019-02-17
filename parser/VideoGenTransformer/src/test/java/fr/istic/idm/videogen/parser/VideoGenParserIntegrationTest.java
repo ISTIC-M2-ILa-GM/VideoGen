@@ -11,7 +11,6 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
@@ -230,8 +229,8 @@ public class VideoGenParserIntegrationTest {
         assertThat(parse.get(0).get(1).isActive(), equalTo(true));
         assertThat(parse.get(0).get(0).getType(), equalTo(MediaType.MANDATORY));
         assertThat(parse.get(0).get(1).getType(), equalTo(MediaType.MANDATORY));
-        assertThat(parse.get(0).get(0).getTotalAlternative(), equalTo(0));
-        assertThat(parse.get(0).get(1).getTotalAlternative(), equalTo(0));
+        assertThat(parse.get(0).get(0).getCurrentAlternatives(), equalTo(0));
+        assertThat(parse.get(0).get(1).getCurrentAlternatives(), equalTo(0));
         assertThat(parse.get(0).get(0).getFileName(), equalTo("v1.mp4"));
         assertThat(parse.get(0).get(1).getFileName(), equalTo("v2.mp4"));
     }
@@ -249,9 +248,9 @@ public class VideoGenParserIntegrationTest {
         assertThat(parse.get(0).get(1).getType(), equalTo(MediaType.OPTIONAL));
         assertThat(parse.get(0).get(2).getType(), equalTo(MediaType.OPTIONAL));
 
-        assertThat(parse.get(0).get(0).getTotalAlternative(), equalTo(0));
-        assertThat(parse.get(0).get(1).getTotalAlternative(), equalTo(0));
-        assertThat(parse.get(0).get(2).getTotalAlternative(), equalTo(0));
+        assertThat(parse.get(0).get(0).getCurrentAlternatives(), equalTo(0));
+        assertThat(parse.get(0).get(1).getCurrentAlternatives(), equalTo(0));
+        assertThat(parse.get(0).get(2).getCurrentAlternatives(), equalTo(0));
 
         assertThat(parse.get(0).get(0).getFileName(), equalTo("v1.mp4"));
         assertThat(parse.get(0).get(1).getFileName(), equalTo("v2.mp4"));
@@ -324,11 +323,11 @@ public class VideoGenParserIntegrationTest {
         assertThat(parsedMedias.get(3).getType(), equalTo(MediaType.MANDATORY));
         assertThat(parsedMedias.get(4).getType(), equalTo(MediaType.OPTIONAL));
 
-        assertThat(parsedMedias.get(0).getTotalAlternative(), equalTo(0));
-        assertThat(parsedMedias.get(1).getTotalAlternative(), equalTo(0));
-        assertThat(parsedMedias.get(2).getTotalAlternative(), equalTo(0));
-        assertThat(parsedMedias.get(3).getTotalAlternative(), equalTo(0));
-        assertThat(parsedMedias.get(4).getTotalAlternative(), equalTo(0));
+        assertThat(parsedMedias.get(0).getCurrentAlternatives(), equalTo(0));
+        assertThat(parsedMedias.get(1).getCurrentAlternatives(), equalTo(0));
+        assertThat(parsedMedias.get(2).getCurrentAlternatives(), equalTo(0));
+        assertThat(parsedMedias.get(3).getCurrentAlternatives(), equalTo(0));
+        assertThat(parsedMedias.get(4).getCurrentAlternatives(), equalTo(0));
 
         assertThat(parsedMedias.get(0).getFileName(), equalTo("v1.mp4"));
         assertThat(parsedMedias.get(1).getFileName(), equalTo("v2.mp4"));
@@ -416,9 +415,9 @@ public class VideoGenParserIntegrationTest {
         assertThat(parsedMedias.get(1).getType(), equalTo(MediaType.ALTERNATIVE));
         assertThat(parsedMedias.get(2).getType(), equalTo(MediaType.ALTERNATIVE));
 
-        assertThat(parsedMedias.get(0).getTotalAlternative(), equalTo(3));
-        assertThat(parsedMedias.get(1).getTotalAlternative(), equalTo(3));
-        assertThat(parsedMedias.get(2).getTotalAlternative(), equalTo(3));
+        assertThat(parsedMedias.get(0).getCurrentAlternatives(), equalTo(3));
+        assertThat(parsedMedias.get(1).getCurrentAlternatives(), equalTo(3));
+        assertThat(parsedMedias.get(2).getCurrentAlternatives(), equalTo(3));
 
         assertThat(parsedMedias.get(0).getFileName(), equalTo("v11.mp4"));
         assertThat(parsedMedias.get(1).getFileName(), equalTo("v12.mp4"));
@@ -461,11 +460,11 @@ public class VideoGenParserIntegrationTest {
         assertThat(parsedMedias.get(3).getType(), equalTo(MediaType.ALTERNATIVE));
         assertThat(parsedMedias.get(4).getType(), equalTo(MediaType.ALTERNATIVE));
 
-        assertThat(parsedMedias.get(0).getTotalAlternative(), equalTo(3));
-        assertThat(parsedMedias.get(1).getTotalAlternative(), equalTo(3));
-        assertThat(parsedMedias.get(2).getTotalAlternative(), equalTo(3));
-        assertThat(parsedMedias.get(3).getTotalAlternative(), equalTo(2));
-        assertThat(parsedMedias.get(4).getTotalAlternative(), equalTo(2));
+        assertThat(parsedMedias.get(0).getCurrentAlternatives(), equalTo(3));
+        assertThat(parsedMedias.get(1).getCurrentAlternatives(), equalTo(3));
+        assertThat(parsedMedias.get(2).getCurrentAlternatives(), equalTo(3));
+        assertThat(parsedMedias.get(3).getCurrentAlternatives(), equalTo(2));
+        assertThat(parsedMedias.get(4).getCurrentAlternatives(), equalTo(2));
 
         assertThat(parsedMedias.get(0).getFileName(), equalTo("v11.mp4"));
         assertThat(parsedMedias.get(1).getFileName(), equalTo("v12.mp4"));

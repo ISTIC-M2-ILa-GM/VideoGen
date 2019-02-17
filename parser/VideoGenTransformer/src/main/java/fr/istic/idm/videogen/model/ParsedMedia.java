@@ -15,6 +15,6 @@ public class ParsedMedia {
     private boolean active;
     private MediaType type;
     private int previousAlternatives;
-    private int totalAlternative;
+    private int currentAlternatives;
     private int index;
 }

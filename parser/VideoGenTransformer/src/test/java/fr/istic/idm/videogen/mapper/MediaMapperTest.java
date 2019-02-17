@@ -53,7 +53,7 @@ public class MediaMapperTest {
         assertThat(parsedMedia.isActive(), equalTo(true));
         assertThat(parsedMedia.getFileName(), equalTo("location"));
         assertThat(parsedMedia.getType(), equalTo(MediaType.MANDATORY));
-        assertThat(parsedMedia.getTotalAlternative(), equalTo(0));
+        assertThat(parsedMedia.getCurrentAlternatives(), equalTo(0));
     }
 
     @Test
@@ -72,7 +72,7 @@ public class MediaMapperTest {
         assertThat(parsedMedia.isActive(), equalTo(false));
         assertThat(parsedMedia.getFileName(), equalTo("location"));
         assertThat(parsedMedia.getType(), equalTo(MediaType.OPTIONAL));
-        assertThat(parsedMedia.getTotalAlternative(), equalTo(0));
+        assertThat(parsedMedia.getCurrentAlternatives(), equalTo(0));
     }
 
     @Test
@@ -90,12 +90,12 @@ public class MediaMapperTest {
 
         assertThat(parsedMedias, notNullValue());
         assertThat(parsedMedias, hasSize(2));
-        assertThat(parsedMedias.get(0).getTotalAlternative(), equalTo(2));
+        assertThat(parsedMedias.get(0).getCurrentAlternatives(), equalTo(2));
         assertThat(parsedMedias.get(0).getIndex(), equalTo(0));
         assertThat(parsedMedias.get(0).getFileName(), equalTo("1"));
         assertThat(parsedMedias.get(0).getType(), equalTo(MediaType.ALTERNATIVE));
         assertThat(parsedMedias.get(0).isActive(), equalTo(false));
-        assertThat(parsedMedias.get(1).getTotalAlternative(), equalTo(2));
+        assertThat(parsedMedias.get(1).getCurrentAlternatives(), equalTo(2));
         assertThat(parsedMedias.get(1).getIndex(), equalTo(1));
         assertThat(parsedMedias.get(1).getFileName(), equalTo("2"));
         assertThat(parsedMedias.get(1).getType(), equalTo(MediaType.ALTERNATIVE));
