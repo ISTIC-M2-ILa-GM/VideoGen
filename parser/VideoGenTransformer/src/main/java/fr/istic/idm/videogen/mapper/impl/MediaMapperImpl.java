@@ -17,7 +17,19 @@ public class MediaMapperImpl implements MediaMapper {
     private PreviousAlternatives previousAlternative = new PreviousAlternatives();
 
     @Override
-    public List<ParsedMedia> toParsedMedia(Media media) {
+    public List<ParsedMedia> toParsedMedias(List<Media> media) {
+        if (media == null) {
+            return new ArrayList<>();
+        }
+        List<ParsedMedia> parsedMedia = new ArrayList<>();
+        for (Media m : media) {
+            parsedMedia.addAll(toParsedMedia(m));
+        }
+        previousAlternative = new PreviousAlternatives();
+        return parsedMedia;
+    }
+
+    protected List<ParsedMedia> toParsedMedia(Media media) {
         List<ParsedMedia> parsedMedias = new ArrayList<>();
         if (media instanceof MandatoryMedia) {
             parsedMedias.add(mandatoryMediaToParsedMedia((MandatoryMedia) media));
@@ -69,19 +81,6 @@ public class MediaMapperImpl implements MediaMapper {
                     .currentAlternatives(size)
                     .build());
         }
-        return parsedMedia;
-    }
-
-    @Override
-    public List<ParsedMedia> toParsedMedias(List<Media> media) {
-        if (media == null) {
-            return new ArrayList<>();
-        }
-        List<ParsedMedia> parsedMedia = new ArrayList<>();
-        for (Media m : media) {
-            parsedMedia.addAll(toParsedMedia(m));
-        }
-        previousAlternative = new PreviousAlternatives();
         return parsedMedia;
     }
 

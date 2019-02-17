@@ -27,10 +27,10 @@ public class VideoGenParserImpl implements VideoGenParser {
 
         List<List<ParsedMedia>> parsedMediaLists = generateMediaLists(preCalculation.getVariants());
 
-        for (int j = 0; j < parsedMediaLists.size(); j++) {
-            List<ParsedMedia> p = parsedMediaLists.get(j);
-            parseOptionals(preCalculation, j, filter(p, MediaType.OPTIONAL));
-            parseAlternatives(preCalculation, j, filter(p, MediaType.ALTERNATIVE));
+        for (int i = 0; i < parsedMediaLists.size(); i++) {
+            List<ParsedMedia> p = parsedMediaLists.get(i);
+            parseOptionals(preCalculation, i, filter(p, MediaType.OPTIONAL));
+            parseAlternatives(preCalculation, i, filter(p, MediaType.ALTERNATIVE));
         }
 
         return parsedMediaLists;
@@ -38,18 +38,19 @@ public class VideoGenParserImpl implements VideoGenParser {
 
     //TODO refactor useless pre calculation
     private PreCalculationValues preCalculate() {
+
         List<AlternativesMedia> alternatives = videoGeneratorModel.getMedias().stream().filter(m -> m instanceof AlternativesMedia).map(m -> (AlternativesMedia) m).collect(Collectors.toList());
         List<OptionalMedia> optionals = videoGeneratorModel.getMedias().stream().filter(m -> m instanceof OptionalMedia).map(m -> (OptionalMedia) m).collect(Collectors.toList());
+
         int alternativeVariants = alternatives.stream().map(m -> m.getMedias().size()).filter(s -> s != 0).reduce((i1, i2) -> i1 * i2).orElse(0);
-        int alternativesSize = alternatives.stream().map(m -> m.getMedias().size()).filter(s -> s != 0).reduce((i1, i2) -> i1 + i2).orElse(0);
         int optionalVariants = (int) Math.pow(2, optionals.size());
-        int variants;
-        if (alternativeVariants == 0) {
-            variants = optionalVariants;
-        } else {
-            variants = optionalVariants * alternativeVariants;
-        }
-        return PreCalculationValues.builder().variants(variants).alternativesSize(alternativesSize).optionalsSize(optionals.size()).optionalVariants(optionalVariants).build();
+
+        return PreCalculationValues.builder()
+                .variants(alternativeVariants == 0 ? optionalVariants : optionalVariants * alternativeVariants)
+                .alternativesSize(alternatives.stream().map(m -> m.getMedias().size()).filter(s -> s != 0).reduce((i1, i2) -> i1 + i2).orElse(0))
+                .optionalsSize(optionals.size())
+                .optionalVariants(optionalVariants)
+                .build();
     }
 
     private List<ParsedMedia> filter(List<ParsedMedia> parsedMedia, MediaType type) {
@@ -73,13 +74,14 @@ public class VideoGenParserImpl implements VideoGenParser {
         }
     }
 
-    private void parseAlternatives(PreCalculationValues preCalculation, int j, List<ParsedMedia> alternatives) {
-        for (int k = 0; k < preCalculation.getAlternativesSize(); k++) {
-            ParsedMedia parsedMedia = alternatives.get(k);
+    private void parseAlternatives(PreCalculationValues preCalculation, int index, List<ParsedMedia> alternatives) {
+        for (int i = 0; i < preCalculation.getAlternativesSize(); i++) {
+            ParsedMedia parsedMedia = alternatives.get(i);
             int previousIndex = parsedMedia.getPreviousAlternatives() * parsedMedia.getIndex() * preCalculation.getOptionalVariants();
             int currentIndex = parsedMedia.getPreviousAlternatives() * (parsedMedia.getIndex() + 1) * preCalculation.getOptionalVariants();
             int nextIndex = parsedMedia.getPreviousAlternatives() * parsedMedia.getCurrentAlternatives() * preCalculation.getOptionalVariants();
-            if (j % nextIndex < currentIndex && j % nextIndex >= previousIndex) {
+            int position = index % nextIndex;
+            if (position < currentIndex && position >= previousIndex) {
                 parsedMedia.setActive(true);
             }
         }
