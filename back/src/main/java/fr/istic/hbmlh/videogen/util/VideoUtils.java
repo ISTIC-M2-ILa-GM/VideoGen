@@ -1,5 +1,7 @@
 package fr.istic.hbmlh.videogen.util;
 
+import fr.istic.hbmlh.videogen.service.IVideoService;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,12 +12,31 @@ import java.util.UUID;
 public class VideoUtils {
 
 
-    public static String generateFfmpegConcatCommand(final List<String> videosPath, UUID uuid) {
+    /**
+     * Génère la commande pour concaténer les vidéos
+     *
+     * @param videosPath le path des vidéos à concat (ne vérifie pas qu'ils existent)
+     * @return La commande à executer
+     */
+    public static String generateFfmpegConcatCommand(final List<String> videosPath, final UUID nomVideo) {
+        final String initialCommand = "ffmpeg -i \"concat:";
 
-        return null;
+        final String videos = videosPath.stream()
+                .reduce((a, b) -> a + "|" + b)
+                .orElse("");
+
+        final String endCommand = "\" -codec copy " + IVideoService.VIDEO_CONCAT_PATH + nomVideo + ".webm";
+
+        return initialCommand + videos + endCommand;
     }
 
-
+    /**
+     * Exécute une commande
+     *
+     * @param command
+     * @return
+     * @throws IOException
+     */
     public static String executeCommand(String command) throws IOException {
 
         final StringBuilder output = new StringBuilder();

@@ -1,5 +1,6 @@
 package fr.istic.hbmlh.videogen;
 
+import fr.istic.hbmlh.videogen.service.IVideoService;
 import fr.istic.hbmlh.videogen.util.VideoUtils;
 import org.assertj.core.util.Lists;
 import org.junit.Assert;
@@ -13,13 +14,14 @@ public class VideoUtilsTest {
     public void shouldGenerateGoodCommandLineForConcat() {
         final String video1 = "aloha.avi";
         final String video2 = "kenavo.avi";
-        final UUID randomName = UUID.randomUUID();
+        final UUID nomVideo = UUID.randomUUID();
 
         final String cmdLine = VideoUtils.generateFfmpegConcatCommand(
-                Lists.newArrayList(video1, video2), randomName
+                Lists.newArrayList(video1, video2), nomVideo
         );
 
-        final String expectedCmdLine = "ffmpeg -i \"concat:" + video1 + "|" + video2 + "\" -codec copy " + randomName + ".avi";
+        final String expectedCmdLine = "ffmpeg -i \"concat:" + video1 + "|" + video2 + "\" -codec copy "
+                + IVideoService.VIDEO_CONCAT_PATH + nomVideo + ".webm";
 
         Assert.assertEquals(expectedCmdLine, cmdLine);
 
