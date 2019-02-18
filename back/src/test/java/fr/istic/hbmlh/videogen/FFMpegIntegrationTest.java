@@ -25,9 +25,9 @@ public class FFMpegIntegrationTest {
   private RandomVideoGenGeneratorFactory randomVideoGenGeneratorFactory;
 
   @Before
-  public void setUp() {
+  public void setUp() throws IOException {
     randomVideoGenGeneratorFactory = new RandomVideoGenGeneratorFactoryImpl(new VideoGenParserFactoryImpl(new VideoGenHelper(), new MediaMapperImpl()));
-    new ProcessBuilder("rm", "-rf", "target/test-classes/videogen/result.avi");
+    new ProcessBuilder("rm", "-rf", "target/test-classes/videogen/result.avi").start();
   }
 
   @Test
