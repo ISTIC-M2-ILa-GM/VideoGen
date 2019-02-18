@@ -13,6 +13,15 @@ export class VideoService {
   }
 
   /**
+   * Demande la génération d'une video et récupère le nom de cette dernière
+   */
+  generateRandomVideo(): Promise<ValueWrapper<string>> {
+    return this.http
+      .get<ValueWrapper<string>>(`${this.url}/generate/random`)
+      .toPromise()
+  }
+
+  /**
    * génère une variante de video en fonction de la config
    * @param videoName
    */
