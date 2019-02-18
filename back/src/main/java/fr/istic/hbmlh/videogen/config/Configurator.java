@@ -11,8 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.util.List;
+
 
 @Component
 public class Configurator {
@@ -26,12 +25,7 @@ public class Configurator {
       throw new RuntimeException("Aucun videogen file dans ./videogen_dir/spec.videogen");
     }
 
-    final List<String> lines = Files.readAllLines(videoGenFile.toPath());
-
-    final String videoGen = lines.stream().reduce((a, b) -> a + "\n" + b)
-      .orElseThrow(() -> new RuntimeException("Impossible de reduce les lignes"));
-
-    return randomVideoGenGeneratorFactory.create(videoGen);
+    return randomVideoGenGeneratorFactory.create(videoGenFile.getPath());
 
   }
 }
