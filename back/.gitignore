@@ -152,6 +152,11 @@ local.properties
 .autotools
 
 # Java annotation processor (APT)
+videogen_dir/
+
+### STS ###
+.apt_generated
+.classpath
 .factorypath
 
 # PDT-specific (PHP Development Tools)
