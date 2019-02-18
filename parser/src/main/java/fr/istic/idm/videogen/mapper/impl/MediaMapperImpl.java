@@ -29,7 +29,7 @@ public class MediaMapperImpl implements MediaMapper {
         return parsedMedia;
     }
 
-    protected List<ParsedMedia> toParsedMedia(Media media) {
+    List<ParsedMedia> toParsedMedia(Media media) {
         List<ParsedMedia> parsedMedias = new ArrayList<>();
         if (media instanceof MandatoryMedia) {
             parsedMedias.add(mandatoryMediaToParsedMedia((MandatoryMedia) media));
