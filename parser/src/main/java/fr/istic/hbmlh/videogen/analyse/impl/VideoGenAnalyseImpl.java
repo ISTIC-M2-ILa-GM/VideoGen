@@ -5,6 +5,7 @@ import fr.istic.hbmlh.videogen.model.AnalysedMedias;
 import fr.istic.hbmlh.videogen.model.Pair;
 import fr.istic.hbmlh.videogen.model.ParsedMedia;
 import fr.istic.hbmlh.videogen.wrapper.FileWrapper;
+import fr.istic.hbmlh.videogen.wrapper.LengthWrapper;
 import lombok.AllArgsConstructor;
 
 import java.util.Comparator;
@@ -16,15 +17,22 @@ public class VideoGenAnalyseImpl implements VideoGenAnalyse {
 
   private FileWrapper fileWrapper;
 
+  private LengthWrapper lengthWrapper;
+
   @Override
   public AnalysedMedias analyse(List<List<ParsedMedia>> parsedMediaList) {
 
     List<Pair<Long, List<ParsedMedia>>> sizes = retrieveSizes(parsedMediaList);
 
+    List<Pair<Long, List<ParsedMedia>>> lengths = retrieveLengths(parsedMediaList);
+
     return AnalysedMedias.builder()
       .longestSize(retrieveLongest(sizes))
       .shortestSize(retrieveShortest(sizes))
       .mediumSize(retrieveMedium(sizes))
+      .longestLength(retrieveLongest(lengths))
+      .shortestLength(retrieveShortest(lengths))
+      .mediumLength(retrieveMedium(lengths))
       .build();
   }
 
@@ -32,7 +40,21 @@ public class VideoGenAnalyseImpl implements VideoGenAnalyse {
     return parsedMediaList.stream().map(ps -> {
       long size = 0;
       for (ParsedMedia p : ps) {
-        size += fileWrapper.sizeOf(p.getFileName());
+        if (p.isActive()) {
+          size += fileWrapper.sizeOf(p.getFileName());
+        }
+      }
+      return new Pair<>(size, ps);
+    }).collect(Collectors.toList());
+  }
+
+  private List<Pair<Long, List<ParsedMedia>>> retrieveLengths(List<List<ParsedMedia>> parsedMediaList) {
+    return parsedMediaList.stream().map(ps -> {
+      long size = 0;
+      for (ParsedMedia p : ps) {
+        if (p.isActive()) {
+          size += lengthWrapper.retrieveLength(p.getFileName());
+        }
       }
       return new Pair<>(size, ps);
     }).collect(Collectors.toList());

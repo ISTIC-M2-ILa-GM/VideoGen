@@ -16,5 +16,7 @@ public class AnalysedMedias {
   private Pair<Long, List<ParsedMedia>> longestSize = new Pair<>();
   private Pair<Long, List<ParsedMedia>> shortestSize = new Pair<>();
   private Pair<Long, List<ParsedMedia>> mediumSize = new Pair<>();
-
+  private Pair<Long, List<ParsedMedia>> longestLength = new Pair<>();
+  private Pair<Long, List<ParsedMedia>> shortestLength = new Pair<>();
+  private Pair<Long, List<ParsedMedia>> mediumLength = new Pair<>();
 }
