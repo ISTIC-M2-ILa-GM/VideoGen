@@ -31,10 +31,12 @@ public class VideoUtils {
 
     final File videoConcatDirectory = new File("/tmp/videogen");
 
+    final String concatCmd = String.format("concat:%s", String.join("|", videosPath));
+
     final ProcessBuilder processBuilder = new ProcessBuilder(
       "/usr/bin/ffmpeg",
       "-i",
-      String.format("concat:%s", String.join("|", videosPath)),
+      concatCmd,
       "-codec",
       "copy",
       "-y",
