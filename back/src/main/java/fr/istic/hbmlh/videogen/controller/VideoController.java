@@ -55,7 +55,7 @@ public class VideoController {
 
   @GetMapping("video/{videoName}")
   public ResponseEntity<UrlResource> show(@PathVariable String videoName) throws MalformedURLException {
-    final File file = new File(IVideoService.VIDEO_CONCAT_PATH + videoName + ".webm");
+    final File file = new File(IVideoService.VIDEO_CONCAT_PATH + videoName + IVideoService.VIDEO_FORMAT);
 
     final UrlResource resource = new UrlResource(file.toURI());
 

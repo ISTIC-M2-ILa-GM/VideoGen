@@ -20,7 +20,7 @@ public class Configurator {
   public RandomVideoGenGenerator randomVideoGenGenerator() throws IOException {
     final RandomVideoGenGeneratorFactory randomVideoGenGeneratorFactory = new RandomVideoGenGeneratorFactoryImpl(new VideoGenParserFactoryImpl(new VideoGenHelper(), new MediaMapperImpl()));
 
-    final File videoGenFile = new File("./back/videogen_dir/spec.videogen");
+    final File videoGenFile = new File("./videogen_dir/spec.videogen");
     if (!videoGenFile.exists()) {
       throw new RuntimeException("Aucun videogen file dans ./videogen_dir/spec.videogen");
     }

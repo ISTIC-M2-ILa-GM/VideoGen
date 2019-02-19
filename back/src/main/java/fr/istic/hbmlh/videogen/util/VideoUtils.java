@@ -2,84 +2,64 @@ package fr.istic.hbmlh.videogen.util;
 
 import fr.istic.hbmlh.videogen.service.IVideoService;
 
-import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.List;
 import java.util.UUID;
 
 public class VideoUtils {
 
+  private static String getFormatFromFilePath(final String filePath) {
 
-    /**
-     * Génère la commande pour concaténer les vidéos
-     *
-     * @param videosPath le path des vidéos à concat (ne vérifie pas qu'ils existent)
-     * @return La commande à executer
-     */
-    public static String generateFfmpegConcatCommand(final List<String> videosPath, final UUID nomVideo) {
-        final String initialCommand = "/usr/bin/ffmpeg -i \"concat:";
+    final int lastIndex = filePath.lastIndexOf(".");
 
-        final String videos = videosPath.stream()
-                .reduce((a, b) -> a + "|" + b)
-                .orElse("");
+    return lastIndex == -1 ? "" : filePath.substring(lastIndex);
+  }
 
-        final String contanedVideo = IVideoService.VIDEO_CONCAT_PATH + nomVideo;
 
-        final String endCommand = "\" -codec copy " + contanedVideo + ".avi && ffmpeg -i " + contanedVideo + ".avi " + contanedVideo + ".webm";
-
-        final String fullCommand = initialCommand + videos + endCommand;
-
-        return fullCommand;
-
+  /**
+   * Génère la commande pour concaténer les vidéos
+   *
+   * @param videosPath le path des vidéos à concat (ne vérifie pas qu'ils existent)
+   */
+  public static void generateFfmpegConcatCommand(final List<String> videosPath, final UUID nomVideo) throws IOException, InterruptedException {
+    if (videosPath.isEmpty()) {
+      throw new RuntimeException("Aucune vidéo à concat !");
     }
 
-    /**
-     * Exécute une commande
-     *
-     * @param command
-     * @return
-     * @throws IOException
-     */
-    public static String executeCommand(String command) throws IOException, InterruptedException {
+    final String format = VideoUtils.getFormatFromFilePath(videosPath.get(0));
 
-        final StringBuilder output = new StringBuilder();
+    final File videoConcatDirectory = new File("/tmp/videogen");
 
-        InputStream inputStream = null;
+    final ProcessBuilder processBuilder = new ProcessBuilder(
+      "/usr/bin/ffmpeg",
+      "-i",
+      String.format("concat:%s", String.join("|", videosPath)),
+      "-codec",
+      "copy",
+      "-y",
+      nomVideo + format
+    );
 
-        try {
-            final Process p = Runtime.getRuntime().exec(command);
+    processBuilder.directory(videoConcatDirectory).start().waitFor();
 
-            inputStream = p.getErrorStream();
+    // puis conversion en webm (meilleur support des navigateurs)
+    final ProcessBuilder convertProcess = new ProcessBuilder(
+      "/usr/bin/ffmpeg",
+      "-i",
+      nomVideo + format,
+      "-qscale",
+      "0",
+      nomVideo + IVideoService.VIDEO_FORMAT
+    );
 
-            final BufferedReader reader =
-                    new BufferedReader(new InputStreamReader(inputStream));
+    convertProcess.directory(videoConcatDirectory).start().waitFor();
 
-            String line;
-            while ((line = reader.readLine()) != null) {
-                output.append(line).append("\n");
-            }
-            final int result = p.waitFor();
-            System.out.println("RESULT : " + result);
+  }
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (inputStream != null) {
-                inputStream.close();
-            }
-        }
 
-        System.out.println("command : " + command);
-        System.out.println(output.toString());
+  public static String generateGifCommandLine(final String videoPath) {
 
-        return output.toString();
-
-    }
-
-    public static String generateGifCommandLine(final String videoPath) {
-
-        return null;
-    }
+    return null;
+  }
 }
