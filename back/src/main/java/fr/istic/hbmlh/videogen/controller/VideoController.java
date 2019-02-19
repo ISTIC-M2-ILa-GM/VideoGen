@@ -10,7 +10,6 @@ import org.springframework.http.MediaTypeFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.File;
@@ -31,25 +30,18 @@ public class VideoController {
     this.randomVideoGenGenerator = randomVideoGenGenerator;
   }
 
-  @PostMapping("generate")
-  public ValueWrapper<String> generateVideo(
-//    @RequestBody(required = false) ValueWrapper<List<String>> wrapper
-  ) {
-    // TODO ici il faut générer la video à partir du fichier videogen passé en paramètre
-
-//    final String videoName = this.videoService.concatVideos(wrapper.getValue());
-
-    return new ValueWrapper<>("nufnuf.webm");
-  }
-
   @GetMapping
   public ValueWrapper<String> generateRandomVideo() {
     // génère une liste de vidéos aléatoire
     final List<String> videosPath = this.randomVideoGenGenerator.generateRandomConfiguration();
 
-    // on les concats pour récuperer le
+    // on les concats les vidéos pour obtenir le nom de la variante
     final String videoName = this.videoService.concatVideos(videosPath);
 
+    // on génère le gif de la variante
+    this.videoService.generateGif(videoName);
+
+    // on retourne le nom de la variante
     return new ValueWrapper<>(videoName);
   }
 
@@ -64,10 +56,15 @@ public class VideoController {
       .body(resource);
   }
 
-  @GetMapping("configuration")
-  public ValueWrapper<String> getConfig() {
-    // TODO envoyer un vrai fichier videogen
-    return new ValueWrapper<>("");
+  @GetMapping("gif/{gifName}")
+  public ResponseEntity<UrlResource> showGif(@PathVariable String gifName) throws MalformedURLException {
+    final File file = new File(IVideoService.GIF_CONCAT_PATH + gifName + IVideoService.GIF_FORMAT);
+
+    final UrlResource resource = new UrlResource(file.toURI());
+
+    return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT)
+      .contentType(MediaTypeFactory.getMediaType(resource).orElse(MediaType.IMAGE_GIF))
+      .body(resource);
   }
 
 

@@ -1,3 +1,3 @@
-<video width="320" height="240" controls *ngIf="url">
-  <source [src]="'http://localhost:8080/api/video/'+url" />
+<video [poster]="'http://localhost:8080/api/gif/' + url" width="320" height="240" controls *ngIf="url">
+  <source [src]="'http://localhost:8080/api/video/' + url"/>
 </video>

@@ -24,11 +24,12 @@ class VideoService : IVideoService {
     }
 
     dirConcat.mkdir()
+    File(IVideoService.GIF_CONCAT_PATH).mkdir()
   }
 
 
-  override fun generateGif(videoName: String?): String {
-    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+  override fun generateGif(videoName: String){
+    VideoUtils.generateGifCommandLine(videoName)
   }
 
   override fun concatVideos(videosNames: MutableList<String>?): String {
@@ -42,10 +43,11 @@ class VideoService : IVideoService {
       throw VideoGenException("Les videos " + videosInnexistante.reduce { a, b -> "$a $b" } + " sont introuvables")
     }
 
-    val idVideo = UUID.randomUUID()
+    val idVideo = UUID.randomUUID().toString()
 
     VideoUtils.generateFfmpegConcatCommand(cleanVideosPaths, idVideo)
 
-    return idVideo.toString()
+
+    return idVideo
   }
 }

@@ -10,6 +10,7 @@ public interface IVideoService {
   String VIDEO_CONCAT_PATH = "/tmp/videogen/";
   String GIF_CONCAT_PATH = VIDEO_CONCAT_PATH + "gif/";
   String VIDEO_FORMAT=".webm";
+  String GIF_FORMAT=".gif";
 
   /**
    * Concatène une liste de videos
@@ -23,10 +24,9 @@ public interface IVideoService {
    * Génère un gif d'une vidéo et retourne le nom du gif
    *
    * @param videoName le nom de la video
-   * @return sont nom
    * @throws VideoGenException si la video n'existe pas
    */
-  String generateGif(final String videoName) throws VideoGenException;
+  void generateGif(final String videoName) throws VideoGenException;
 
 
 }
