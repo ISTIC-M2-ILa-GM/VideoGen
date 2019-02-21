@@ -35,6 +35,7 @@ public class VideoGenAnalyseTest {
 
   @Before
   public void setUp() {
+
     videoGenAnalyse = new VideoGenAnalyseImpl(mockFileWrapper, mockLengthWrapper);
   }
 
@@ -50,7 +51,6 @@ public class VideoGenAnalyseTest {
     when(mockFileWrapper.sizeOf("b")).thenReturn(0L);
     when(mockFileWrapper.sizeOf("c")).thenReturn(5L);
     when(mockFileWrapper.sizeOf("d")).thenReturn(9L);
-    when(mockFileWrapper.sizeOf("e")).thenReturn(100L);
 
     AnalysedMedias analysedMedias = videoGenAnalyse.analyse(parsedMediaList);
 
@@ -78,7 +78,6 @@ public class VideoGenAnalyseTest {
     when(mockLengthWrapper.retrieveLength("b")).thenReturn(0L);
     when(mockLengthWrapper.retrieveLength("c")).thenReturn(5L);
     when(mockLengthWrapper.retrieveLength("d")).thenReturn(9L);
-    when(mockLengthWrapper.retrieveLength("e")).thenReturn(100L);
 
     AnalysedMedias analysedMedias = videoGenAnalyse.analyse(parsedMediaList);
 

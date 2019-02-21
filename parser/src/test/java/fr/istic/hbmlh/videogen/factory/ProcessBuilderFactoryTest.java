@@ -62,7 +62,6 @@ public class ProcessBuilderFactoryTest {
     ProcessBuilderWrapper processBuilder = processBuilderFactory.create("/tmp", "ls", "test");
 
     assertThat(processBuilder, notNullValue());
-    assertThat(processBuilder.directory().getPath(), equalTo("/tmp"));
     assertThat(processBuilder.command().get(0), equalTo("ls"));
     assertThat(processBuilder.command().get(1), equalTo("test"));
   }
