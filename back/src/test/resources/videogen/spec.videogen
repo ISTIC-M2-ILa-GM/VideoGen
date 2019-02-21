@@ -1,0 +1,31 @@
+VideoGen {
+	optional videoseq pub_1 "pub/opt_pub_1.avi"
+	mandatory videoseq avez "avez/avez_vous_deja_vu.avi"
+	alternatives intro {
+		videoseq intro_crime "intro/intro_crime.avi"
+		videoseq intro_fagot "intro/intro_fagot.avi"
+		videoseq intro_lutin "intro/intro_lutin.avi"
+		videoseq intro_nufnuf "intro/intro_nufnuf.avi"
+		videoseq intro_taxi "intro/intro_taxi.avi"
+		videoseq intro_toupoutous "intro/intro_toupoutous.avi"
+	}
+	optional videoseq pub_2 "pub/opt_pub_2.avi"
+	alternatives question {
+		videoseq question_crime "question/question_crime.avi"
+		videoseq question_fagot "question/question_fagot.avi"
+		videoseq question_lutin "question/question_lutin.avi"
+		videoseq question_nufnuf "question/question_nufnuf.avi"
+		videoseq question_taxi "question/question_taxi.avi"
+		videoseq question_toupoutous "question/question_toupoutous.avi"
+	}
+	optional videoseq pub_3 "pub/opt_pub_3.avi"
+	alternatives reponse {
+		videoseq reponse_crime "reponse/reponse_crime.avi"
+		videoseq reponse_fagot "reponse/reponse_fagot.avi"
+		videoseq reponse_lutin "reponse/reponse_lutin.avi"
+		videoseq reponse_nufnuf "reponse/reponse_nufnuf.avi"
+		videoseq reponse_taxi "reponse/reponse_taxi.avi"
+		videoseq reponse_toupoutous "reponse/reponse_toupoutous.avi"
+	}
+	mandatory videoseq maintenant_oui "simple_fin/maintenant_oui.avi"
+}

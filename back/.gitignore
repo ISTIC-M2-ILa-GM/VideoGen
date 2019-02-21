@@ -1,4 +1,3 @@
-src/test/resources/videogen
 .attach_pid*
 .idea/*
 # Created by .ignore support plugin (hsz.mobi)
@@ -152,8 +151,7 @@ local.properties
 .autotools
 
 # Java annotation processor (APT)
-../videogen_dir/
-
+=
 ### STS ###
 .apt_generated
 .classpath
