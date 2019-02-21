@@ -9,10 +9,10 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class RandomVideoGenGeneratorFactoryImpl implements RandomVideoGenGeneratorFactory {
 
-    private VideoGenParserFactory videoGenParserFactory;
+  private VideoGenParserFactory videoGenParserFactory;
 
-    @Override
-    public RandomVideoGenGenerator create(String videoGenFilePath) {
-        return new RandomVideoGenGeneratorImpl(videoGenParserFactory.create(videoGenFilePath));
-    }
+  @Override
+  public RandomVideoGenGenerator create(String videoGenFilePath) {
+    return new RandomVideoGenGeneratorImpl(videoGenParserFactory.create(videoGenFilePath));
+  }
 }

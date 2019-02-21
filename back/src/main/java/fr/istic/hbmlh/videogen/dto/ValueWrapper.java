@@ -1,8 +1,10 @@
 package fr.istic.hbmlh.videogen.dto;
 
 public class ValueWrapper<T> {
-  private final T value;
+  private T value;
 
+  public ValueWrapper() {
+  }
 
   public ValueWrapper(T value) {
     this.value = value;
@@ -10,5 +12,9 @@ public class ValueWrapper<T> {
 
   public T getValue() {
     return value;
+  }
+
+  public void setValue(T value) {
+    this.value = value;
   }
 }

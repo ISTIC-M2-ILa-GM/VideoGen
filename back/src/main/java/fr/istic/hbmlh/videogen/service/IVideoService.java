@@ -6,11 +6,10 @@ import java.util.List;
 
 public interface IVideoService {
 
-  String VIDEOGEN_ROOT_PATH = "videogen_dir";
   String VIDEO_CONCAT_PATH = "/tmp/videogen/";
   String GIF_CONCAT_PATH = VIDEO_CONCAT_PATH + "gif/";
-  String VIDEO_FORMAT=".webm";
-  String GIF_FORMAT=".gif";
+  String VIDEO_FORMAT = ".webm";
+  String GIF_FORMAT = ".gif";
 
   /**
    * Concatène une liste de videos

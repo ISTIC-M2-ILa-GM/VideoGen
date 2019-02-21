@@ -1,6 +1,11 @@
 package fr.istic.hbmlh.videogen.controller;
 
 import fr.istic.hbmlh.videogen.dto.ValueWrapper;
+import fr.istic.hbmlh.videogen.factory.RandomVideoGenGeneratorFactory;
+import fr.istic.hbmlh.videogen.factory.impl.RandomVideoGenGeneratorFactoryImpl;
+import fr.istic.hbmlh.videogen.factory.impl.VideoGenParserFactoryImpl;
+import fr.istic.hbmlh.videogen.generated.VideoGenHelper;
+import fr.istic.hbmlh.videogen.mapper.impl.MediaMapperImpl;
 import fr.istic.hbmlh.videogen.randomizer.RandomVideoGenGenerator;
 import fr.istic.hbmlh.videogen.service.IVideoService;
 import org.springframework.core.io.UrlResource;
@@ -10,11 +15,14 @@ import org.springframework.http.MediaTypeFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.File;
 import java.net.MalformedURLException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class VideoController {
@@ -22,18 +30,39 @@ public class VideoController {
 
   private final IVideoService videoService;
 
-  private final RandomVideoGenGenerator randomVideoGenGenerator;
+  private RandomVideoGenGenerator randomVideoGenGenerator;
+  private String videogenDirAbsolutePath = null;
 
-  public VideoController(final IVideoService videoService,
-                         final RandomVideoGenGenerator randomVideoGenGenerator) {
+  public VideoController(final IVideoService videoService) {
     this.videoService = videoService;
-    this.randomVideoGenGenerator = randomVideoGenGenerator;
+  }
+
+  /**
+   * Permet de configurer le path du videogen
+   */
+  @PostMapping("config")
+  public void configureVideoGen(@RequestBody ValueWrapper<String> pathWrapper) {
+
+    final String absolutePathVideogen = pathWrapper.getValue();
+
+    final RandomVideoGenGeneratorFactory randomVideoGenGeneratorFactory = new RandomVideoGenGeneratorFactoryImpl(new VideoGenParserFactoryImpl(new VideoGenHelper(), new MediaMapperImpl()));
+
+    final File videoGenFile = new File(absolutePathVideogen);
+    if (!videoGenFile.exists()) {
+      throw new RuntimeException("Aucun videogen file dans " + absolutePathVideogen);
+    }
+    this.videogenDirAbsolutePath = videoGenFile.getParentFile().getAbsolutePath();
+
+    randomVideoGenGenerator = randomVideoGenGeneratorFactory.create(videoGenFile.getAbsolutePath());
+
   }
 
   @GetMapping
   public ValueWrapper<String> generateRandomVideo() {
     // génère une liste de vidéos aléatoire
-    final List<String> videosPath = this.randomVideoGenGenerator.generateRandomConfiguration();
+    final List<String> videosPath = this.randomVideoGenGenerator.generateRandomConfiguration().stream()
+      .map(it -> this.videogenDirAbsolutePath + "/" + it)
+      .collect(Collectors.toList());
 
     // on les concats les vidéos pour obtenir le nom de la variante
     final String videoName = this.videoService.concatVideos(videosPath);
@@ -66,6 +95,5 @@ public class VideoController {
       .contentType(MediaTypeFactory.getMediaType(resource).orElse(MediaType.IMAGE_GIF))
       .body(resource);
   }
-
 
 }

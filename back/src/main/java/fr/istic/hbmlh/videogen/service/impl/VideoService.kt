@@ -2,7 +2,6 @@ package fr.istic.hbmlh.videogen.service.impl
 
 import fr.istic.hbmlh.videogen.exception.VideoGenException
 import fr.istic.hbmlh.videogen.service.IVideoService
-import fr.istic.hbmlh.videogen.service.IVideoService.VIDEOGEN_ROOT_PATH
 import fr.istic.hbmlh.videogen.util.VideoUtils
 import org.springframework.stereotype.Service
 import java.io.File
@@ -28,24 +27,23 @@ class VideoService : IVideoService {
   }
 
 
-  override fun generateGif(videoName: String){
+  override fun generateGif(videoName: String) {
     VideoUtils.generateGifCommandLine(videoName)
   }
 
   override fun concatVideos(videosNames: MutableList<String>?): String {
-    if (videosNames == null) {
+    if (videosNames == null || videosNames.isEmpty()) {
       throw VideoGenException("Pas de videos à concaténer")
     }
-    val absolutePath = File(VIDEOGEN_ROOT_PATH).absolutePath
-    val cleanVideosPaths = videosNames.map { "$absolutePath/$it" }
-    val videosInnexistante = cleanVideosPaths.filter { !File(it).exists() }
+
+    val videosInnexistante = videosNames.filter { !File(it).exists() }
     if (videosInnexistante.isNotEmpty()) {
-      throw VideoGenException("Les videos " + videosInnexistante.reduce { a, b -> "$a $b" } + " sont introuvables")
+      throw VideoGenException("Les videos " + videosInnexistante.reduce { a, b -> "$a \n $b" } + " sont introuvables")
     }
 
     val idVideo = UUID.randomUUID().toString()
 
-    VideoUtils.generateFfmpegConcatCommand(cleanVideosPaths, idVideo)
+    VideoUtils.generateFfmpegConcatCommand(videosNames, idVideo)
 
 
     return idVideo

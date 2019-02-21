@@ -7,6 +7,7 @@ import {RandomComponent} from "./random/random.component";
 import {VideoComponent} from "./video/video.component";
 import {ConfiguratorComponent} from "./configurator/configurator.component";
 import {HttpClientModule} from "@angular/common/http";
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,8 @@ import {HttpClientModule} from "@angular/common/http";
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     AccueilRoutingModule
   ]

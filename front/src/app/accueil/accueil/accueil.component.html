@@ -1,6 +1,13 @@
-<p>
-  accueil works!
-</p>
-<button routerLink="/random">Random</button>
+<div *ngIf="submitOk">
+  <button routerLink="/random">Random</button>
+  <br/>
+  <button *ngIf="false" routerLink="/configurator">Configurator</button>
+</div>
 <br/>
-<button routerLink="/configurator">Configurator</button>
+<br/>
+<form (ngSubmit)="submit()" *ngIf="!submitOk">
+  <label for="pathVideogen">absolute path :</label>
+  <input [(ngModel)]="pathVideogen" id="pathVideogen" type="text" placeholder="/mon/exemple/toto.videogen" name="path"/>
+  <br/>
+  <button type="submit" [disabled]="btnDisabled || !pathVideogen">Valider</button>
+</form>

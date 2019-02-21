@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ValueWrapper} from '../accueil/dto/value-wrapper';
-import {VideoGenConfig} from '../accueil/dto/video-gen-config';
 
 @Injectable({
   providedIn: 'root'
@@ -32,12 +31,12 @@ export class VideoService {
   }
 
   /**
-   * récupère la configuration pour générer un formulaire
+   * Définit le path du fichier videogen pour le serveur
+   * @param pathVideogen
    */
-  getVideoGen(): Promise<VideoGenConfig> {
+  configureVideoGen(pathVideogen: string): Promise<void> {
     return this.http
-      .get<VideoGenConfig>(`${this.url}/config`)
+      .post<void>(`${this.url}/config`, new ValueWrapper(pathVideogen))
       .toPromise();
   }
-
 }
