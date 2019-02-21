@@ -21,4 +21,7 @@ export class RandomComponent implements OnInit {
   }
 
 
+  reload() {
+    window.location.reload();
+  }
 }
