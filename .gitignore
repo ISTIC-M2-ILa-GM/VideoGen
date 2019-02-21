@@ -1,3 +1,5 @@
+!videogen_directory/README.md
+
 *.attach_pid*
 **.idea/
 *.iml
