@@ -42,12 +42,23 @@ public class VideoGenMassVideoGenGenerator {
   }
 
   private void start() {
-    FileUtils.findFilesFromFolder(new File(directory)).stream().filter(f -> f.getName().endsWith(VIDEOGEN_EXT)).forEach(f -> {
-      log.info("VideoGenMassVideoGenGenerator: début de la génération de {}", f.getAbsolutePath());
-      RandomVideoGenGenerator randomVideoGenGenerator = randomVideoGenGeneratorFactory.create(f.getPath());
-      List<String> files = randomVideoGenGenerator.generateRandomConfiguration().stream().map(v -> String.format("%s/%s", f.getParentFile().getAbsolutePath(), v)).collect(Collectors.toList());
-      String uuidFile = videoService.concatVideos(files);
-      log.info("VideoGenMassVideoGenGenerator: video généré {}{}{}", VIDEO_CONCAT_PATH, uuidFile, VIDEO_FORMAT);
-    });
+    int i = 0;
+    int j = 0;
+    for (File f : FileUtils.findFilesFromFolder(new File(directory))) {
+      if (f.getName().endsWith(VIDEOGEN_EXT)) {
+        try {
+          log.info("VideoGenMassVideoGenGenerator: début de la génération de {}", f.getAbsolutePath());
+          RandomVideoGenGenerator randomVideoGenGenerator = randomVideoGenGeneratorFactory.create(f.getPath());
+          List<String> files = randomVideoGenGenerator.generateRandomConfiguration().stream().map(v -> String.format("%s/%s", f.getParentFile().getAbsolutePath(), v)).collect(Collectors.toList());
+          String uuidFile = videoService.concatVideos(files);
+          log.info("VideoGenMassVideoGenGenerator: video généré {}{}{}", VIDEO_CONCAT_PATH, uuidFile, VIDEO_FORMAT);
+          i++;
+        } catch (Exception e) {
+          log.error("VideoGenMassVideoGenGenerator: une erreur est survenue", e);
+          j++;
+        }
+      }
+    }
+    log.info("VideoGenMassVideoGenGenerator: vidéo générées : {}, vidéo en erreur: {}", i, j);
   }
 }

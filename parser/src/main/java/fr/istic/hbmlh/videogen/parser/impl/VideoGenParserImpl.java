@@ -9,11 +9,13 @@ import fr.istic.hbmlh.videogen.model.MediaType;
 import fr.istic.hbmlh.videogen.model.ParsedMedia;
 import fr.istic.hbmlh.videogen.model.PreCalculationValues;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @AllArgsConstructor
 public class VideoGenParserImpl implements VideoGenParser {
 
@@ -23,6 +25,7 @@ public class VideoGenParserImpl implements VideoGenParser {
 
     public List<List<ParsedMedia>> parse() {
 
+        log.info("VideoGenParserImpl: début du parsing...");
         PreCalculationValues preCalculation = preCalculate();
 
         List<List<ParsedMedia>> parsedMediaLists = generateMediaLists(preCalculation.getVariants());
@@ -32,7 +35,7 @@ public class VideoGenParserImpl implements VideoGenParser {
             parseOptionals(preCalculation, i, filter(p, MediaType.OPTIONAL));
             parseAlternatives(preCalculation, i, filter(p, MediaType.ALTERNATIVE));
         }
-
+        log.info("VideoGenParserImpl: Parsing fini, nous avons {} variantes", parsedMediaLists.size());
         return parsedMediaLists;
     }
 
