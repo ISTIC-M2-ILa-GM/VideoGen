@@ -16,7 +16,7 @@ export class VideoService {
    */
   generateRandomVideo(): Promise<ValueWrapper<string>> {
     return this.http
-      .get<ValueWrapper<string>>(`${this.url}/generate/random`)
+      .get<ValueWrapper<string>>(`${this.url}/random`)
       .toPromise()
   }
 

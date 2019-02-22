@@ -27,7 +27,6 @@ import java.util.stream.Collectors;
 @RestController
 public class VideoController {
 
-
   private final IVideoService videoService;
 
   private RandomVideoGenGenerator randomVideoGenGenerator;
@@ -57,7 +56,7 @@ public class VideoController {
 
   }
 
-  @GetMapping
+  @GetMapping("random")
   public ValueWrapper<String> generateRandomVideo() {
     // génère une liste de vidéos aléatoire
     final List<String> videosPath = this.randomVideoGenGenerator.generateRandomConfiguration().stream()
