@@ -1,4 +1,4 @@
-!videogen_directory/README.md
+videogen_directory/
 
 *.attach_pid*
 **.idea/
