@@ -1,7 +1,7 @@
 # VideoGen
 
 ## Binômes
-* Gwénolé LE HENAF
+* Gwénolé LE HENAFF
 * Hugo BANNIER
 
 ## Technologies

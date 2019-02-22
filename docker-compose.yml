@@ -14,3 +14,5 @@ services:
     build: back/
     expose:
       - "8080"
+    volumes:
+      - ./back/src/test/resources/videogen:/tmp/videogen_dir

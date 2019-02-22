@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {VideoService} from "../../service/video.service";
+import {Video} from '../dto/video';
 
 @Component({
   selector: 'app-configurator',
@@ -7,15 +8,14 @@ import {VideoService} from "../../service/video.service";
   styleUrls: ['./configurator.component.scss']
 })
 export class ConfiguratorComponent implements OnInit {
+  generator?: Array<Array<Video>>;
 
-  constructor(
-    private readonly videoService: VideoService
-  ) {
+  constructor(private readonly videoService: VideoService) {
   }
 
   ngOnInit() {
-    // this.videoService.getVideoGen()
-    //   .then(it => console.log('TODO preparer forumlaire', it));
+    this.videoService.getConfigurator()
+      .then(it => this.generator = it);
   }
 
 }
