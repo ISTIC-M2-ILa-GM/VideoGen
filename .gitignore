@@ -1,5 +1,3 @@
-videogen_directory/
-
 *.attach_pid*
 **.idea/
 *.iml
