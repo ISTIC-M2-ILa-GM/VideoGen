@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ValueWrapper} from '../accueil/dto/value-wrapper';
+import {Video} from '../accueil/dto/video';
 
 @Injectable({
   providedIn: 'root'
@@ -21,13 +22,12 @@ export class VideoService {
   }
 
   /**
-   * génère une variante de video en fonction de la config
-   * @param videoName
+   * Demande la configuration du videogen
    */
-  generateVideo(videoName: string[]): Promise<ValueWrapper<string>> {
+  getConfigurator(): Promise<Array<Array<Video>>> {
     return this.http
-      .post<ValueWrapper<string>>(`${this.url}/generate`, videoName)
-      .toPromise();
+      .get<Array<Array<Video>>>(`${this.url}/generator`)
+      .toPromise()
   }
 
   /**
