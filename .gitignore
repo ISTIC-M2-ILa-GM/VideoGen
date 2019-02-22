@@ -149,9 +149,6 @@ $RECYCLE.BIN/
 # Compiled class file
 *.class
 
-# Log file
-*.log
-
 # BlueJ files
 *.ctxt
 
@@ -172,10 +169,6 @@ hs_err_pid*
 ### Java template
 # Compiled class file
 *.class
-
-# Log file
-*.log
-
 # BlueJ files
 *.ctxt
 

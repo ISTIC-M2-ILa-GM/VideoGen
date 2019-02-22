@@ -1,0 +1,153 @@
+21:45:38.901 [main] INFO fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator - VideoGenMassVideoGenGenerator: préparation de la generation de videogen_directory/
+21:45:38.906 [main] INFO fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator - VideoGenMassVideoGenGenerator: generation initialisé
+21:45:38.908 [main] INFO fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator - VideoGenMassVideoGenGenerator: début de la génération de /home/malah/Code/ISTIC/Projects/VideoGen/videogen_directory/Bashar NEMEH_Sylvia Hantavoliaina RABE/example1.videogen
+21:45:39.770 [main] INFO fr.istic.hbmlh.videogen.randomizer.impl.RandomVideoGenGeneratorImpl - VideoGenParserImpl: Sélection d'une variante...
+21:45:39.770 [main] INFO fr.istic.hbmlh.videogen.parser.impl.VideoGenParserImpl - VideoGenParserImpl: début du parsing...
+21:45:39.815 [main] INFO fr.istic.hbmlh.videogen.parser.impl.VideoGenParserImpl - VideoGenParserImpl: Parsing fini, nous avons 6 variantes
+21:45:39.816 [main] INFO fr.istic.hbmlh.videogen.randomizer.impl.RandomVideoGenGeneratorImpl - VideoGenParserImpl: sélection faite, nous avons 3 videos.
+21:45:39.817 [main] INFO fr.istic.hbmlh.videogen.util.VideoUtils - Début de la concaténation de 3 vidéos
+21:45:39.855 [main] INFO fr.istic.hbmlh.videogen.util.VideoUtils - Done
+21:45:39.855 [main] INFO fr.istic.hbmlh.videogen.util.VideoUtils - Conversion du format .mp4 en .webm
+21:46:03.290 [main] INFO fr.istic.hbmlh.videogen.util.VideoUtils - Done
+21:46:03.290 [main] INFO fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator - VideoGenMassVideoGenGenerator: video généré /tmp/videogen/aab672c0-c9bf-4a34-817f-85f9dac7fd73.webm
+21:46:03.290 [main] INFO fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator - VideoGenMassVideoGenGenerator: début de la génération de /home/malah/Code/ISTIC/Projects/VideoGen/videogen_directory/KADRI_MERZOUK/specs.videogen
+21:46:03.320 [main] INFO fr.istic.hbmlh.videogen.randomizer.impl.RandomVideoGenGeneratorImpl - VideoGenParserImpl: Sélection d'une variante...
+21:46:03.320 [main] INFO fr.istic.hbmlh.videogen.parser.impl.VideoGenParserImpl - VideoGenParserImpl: début du parsing...
+21:46:03.320 [main] INFO fr.istic.hbmlh.videogen.parser.impl.VideoGenParserImpl - VideoGenParserImpl: Parsing fini, nous avons 4 variantes
+21:46:03.320 [main] INFO fr.istic.hbmlh.videogen.randomizer.impl.RandomVideoGenGeneratorImpl - VideoGenParserImpl: sélection faite, nous avons 4 videos.
+21:46:03.321 [main] INFO fr.istic.hbmlh.videogen.util.VideoUtils - Début de la concaténation de 4 vidéos
+21:46:03.342 [main] INFO fr.istic.hbmlh.videogen.util.VideoUtils - Done
+21:46:03.343 [main] INFO fr.istic.hbmlh.videogen.util.VideoUtils - Conversion du format .mp4 en .webm
+21:46:13.047 [main] INFO fr.istic.hbmlh.videogen.util.VideoUtils - Done
+21:46:13.047 [main] INFO fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator - VideoGenMassVideoGenGenerator: video généré /tmp/videogen/cd0f18de-ba14-4c60-885e-6788e7344278.webm
+21:46:13.047 [main] INFO fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator - VideoGenMassVideoGenGenerator: début de la génération de /home/malah/Code/ISTIC/Projects/VideoGen/videogen_directory/DESCHAMPS_Mathieu_&_ESNAULT_Jeremy/specs.videogen
+21:46:13.074 [main] INFO fr.istic.hbmlh.videogen.randomizer.impl.RandomVideoGenGeneratorImpl - VideoGenParserImpl: Sélection d'une variante...
+21:46:13.074 [main] INFO fr.istic.hbmlh.videogen.parser.impl.VideoGenParserImpl - VideoGenParserImpl: début du parsing...
+21:46:13.080 [main] INFO fr.istic.hbmlh.videogen.parser.impl.VideoGenParserImpl - VideoGenParserImpl: Parsing fini, nous avons 192 variantes
+21:46:13.080 [main] INFO fr.istic.hbmlh.videogen.randomizer.impl.RandomVideoGenGeneratorImpl - VideoGenParserImpl: sélection faite, nous avons 7 videos.
+21:46:13.081 [main] INFO fr.istic.hbmlh.videogen.util.VideoUtils - Début de la concaténation de 7 vidéos
+21:46:13.108 [main] INFO fr.istic.hbmlh.videogen.util.VideoUtils - Done
+21:46:13.108 [main] INFO fr.istic.hbmlh.videogen.util.VideoUtils - Conversion du format .mp4 en .webm
+21:46:45.126 [main] INFO fr.istic.hbmlh.videogen.util.VideoUtils - Done
+21:46:45.126 [main] INFO fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator - VideoGenMassVideoGenGenerator: video généré /tmp/videogen/215d1821-0331-4fc1-b0a0-d0383b38c29d.webm
+21:46:45.126 [main] INFO fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator - VideoGenMassVideoGenGenerator: début de la génération de /home/malah/Code/ISTIC/Projects/VideoGen/videogen_directory/Intermediaire/MaVideo.videogen
+21:46:45.150 [main] INFO fr.istic.hbmlh.videogen.randomizer.impl.RandomVideoGenGeneratorImpl - VideoGenParserImpl: Sélection d'une variante...
+21:46:45.150 [main] INFO fr.istic.hbmlh.videogen.parser.impl.VideoGenParserImpl - VideoGenParserImpl: début du parsing...
+21:46:45.151 [main] INFO fr.istic.hbmlh.videogen.parser.impl.VideoGenParserImpl - VideoGenParserImpl: Parsing fini, nous avons 6 variantes
+21:46:45.151 [main] INFO fr.istic.hbmlh.videogen.randomizer.impl.RandomVideoGenGeneratorImpl - VideoGenParserImpl: sélection faite, nous avons 2 videos.
+21:46:45.152 [main] ERROR fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator - VideoGenMassVideoGenGenerator: une erreur est survenue
+fr.istic.hbmlh.videogen.exception.VideoGenException: Les videos /home/malah/Code/ISTIC/Projects/VideoGen/videogen_directory/Intermediaire/resources.Orangina 
+ /home/malah/Code/ISTIC/Projects/VideoGen/videogen_directory/Intermediaire/resources.DisparitionVegetariens sont introuvables
+	at fr.istic.hbmlh.videogen.service.impl.VideoService.concatVideos(VideoService.kt:41)
+	at fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator.start(VideoGenMassVideoGenGenerator.java:53)
+	at fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator.main(VideoGenMassVideoGenGenerator.java:41)
+21:46:45.152 [main] INFO fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator - VideoGenMassVideoGenGenerator: début de la génération de /home/malah/Code/ISTIC/Projects/VideoGen/videogen_directory/LEBLANC_VANSTEEN/spec.videogen
+21:46:45.173 [main] INFO fr.istic.hbmlh.videogen.randomizer.impl.RandomVideoGenGeneratorImpl - VideoGenParserImpl: Sélection d'une variante...
+21:46:45.173 [main] INFO fr.istic.hbmlh.videogen.parser.impl.VideoGenParserImpl - VideoGenParserImpl: début du parsing...
+21:46:45.173 [main] INFO fr.istic.hbmlh.videogen.parser.impl.VideoGenParserImpl - VideoGenParserImpl: Parsing fini, nous avons 16 variantes
+21:46:45.173 [main] INFO fr.istic.hbmlh.videogen.randomizer.impl.RandomVideoGenGeneratorImpl - VideoGenParserImpl: sélection faite, nous avons 6 videos.
+21:46:45.173 [main] ERROR fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator - VideoGenMassVideoGenGenerator: une erreur est survenue
+fr.istic.hbmlh.videogen.exception.VideoGenException: Les videos /home/malah/Code/ISTIC/Projects/VideoGen/videogen_directory/LEBLANC_VANSTEEN/videos/count.mp4 
+ /home/malah/Code/ISTIC/Projects/VideoGen/videogen_directory/LEBLANC_VANSTEEN/videos/profanity.mp4 
+ /home/malah/Code/ISTIC/Projects/VideoGen/videogen_directory/LEBLANC_VANSTEEN/videos/golf.mp4 
+ /home/malah/Code/ISTIC/Projects/VideoGen/videogen_directory/LEBLANC_VANSTEEN/videos/music.mp4 
+ /home/malah/Code/ISTIC/Projects/VideoGen/videogen_directory/LEBLANC_VANSTEEN/videos/uhhh.mp4 
+ /home/malah/Code/ISTIC/Projects/VideoGen/videogen_directory/LEBLANC_VANSTEEN/videos/plankton.mp4 sont introuvables
+	at fr.istic.hbmlh.videogen.service.impl.VideoService.concatVideos(VideoService.kt:41)
+	at fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator.start(VideoGenMassVideoGenGenerator.java:53)
+	at fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator.main(VideoGenMassVideoGenGenerator.java:41)
+21:46:45.173 [main] INFO fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator - VideoGenMassVideoGenGenerator: début de la génération de /home/malah/Code/ISTIC/Projects/VideoGen/videogen_directory/specification.videogen
+21:46:45.192 [main] INFO fr.istic.hbmlh.videogen.randomizer.impl.RandomVideoGenGeneratorImpl - VideoGenParserImpl: Sélection d'une variante...
+21:46:45.192 [main] INFO fr.istic.hbmlh.videogen.parser.impl.VideoGenParserImpl - VideoGenParserImpl: début du parsing...
+21:46:45.193 [main] INFO fr.istic.hbmlh.videogen.parser.impl.VideoGenParserImpl - VideoGenParserImpl: Parsing fini, nous avons 6 variantes
+21:46:45.193 [main] INFO fr.istic.hbmlh.videogen.randomizer.impl.RandomVideoGenGeneratorImpl - VideoGenParserImpl: sélection faite, nous avons 2 videos.
+21:46:45.193 [main] INFO fr.istic.hbmlh.videogen.util.VideoUtils - Début de la concaténation de 2 vidéos
+21:46:45.226 [main] INFO fr.istic.hbmlh.videogen.util.VideoUtils - Done
+21:46:45.226 [main] INFO fr.istic.hbmlh.videogen.util.VideoUtils - Conversion du format .mp4 en .webm
+21:47:14.793 [main] INFO fr.istic.hbmlh.videogen.util.VideoUtils - Done
+21:47:14.793 [main] INFO fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator - VideoGenMassVideoGenGenerator: video généré /tmp/videogen/0c8c50a3-b3d0-40ff-8c88-584746791914.webm
+21:47:14.793 [main] INFO fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator - VideoGenMassVideoGenGenerator: début de la génération de /home/malah/Code/ISTIC/Projects/VideoGen/videogen_directory/LESAINT_Arthur_LEBUHAN_Riwal/specs.videogen
+21:47:14.811 [main] INFO fr.istic.hbmlh.videogen.randomizer.impl.RandomVideoGenGeneratorImpl - VideoGenParserImpl: Sélection d'une variante...
+21:47:14.811 [main] INFO fr.istic.hbmlh.videogen.parser.impl.VideoGenParserImpl - VideoGenParserImpl: début du parsing...
+21:47:14.812 [main] INFO fr.istic.hbmlh.videogen.parser.impl.VideoGenParserImpl - VideoGenParserImpl: Parsing fini, nous avons 12 variantes
+21:47:14.812 [main] INFO fr.istic.hbmlh.videogen.randomizer.impl.RandomVideoGenGeneratorImpl - VideoGenParserImpl: sélection faite, nous avons 6 videos.
+21:47:14.812 [main] ERROR fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator - VideoGenMassVideoGenGenerator: une erreur est survenue
+fr.istic.hbmlh.videogen.exception.VideoGenException: Les videos /home/malah/Code/ISTIC/Projects/VideoGen/videogen_directory/LESAINT_Arthur_LEBUHAN_Riwal/videos/kaamelott-1.mp4 
+ /home/malah/Code/ISTIC/Projects/VideoGen/videogen_directory/LESAINT_Arthur_LEBUHAN_Riwal/videos/kaamelott-2.mp4 
+ /home/malah/Code/ISTIC/Projects/VideoGen/videogen_directory/LESAINT_Arthur_LEBUHAN_Riwal/videos/kaamelott-3.mp4 
+ /home/malah/Code/ISTIC/Projects/VideoGen/videogen_directory/LESAINT_Arthur_LEBUHAN_Riwal/videos/kaamelott-6.mp4 
+ /home/malah/Code/ISTIC/Projects/VideoGen/videogen_directory/LESAINT_Arthur_LEBUHAN_Riwal/videos/kaamelott-7.mp4 
+ /home/malah/Code/ISTIC/Projects/VideoGen/videogen_directory/LESAINT_Arthur_LEBUHAN_Riwal/videos/kaamelott-8.mp4 sont introuvables
+	at fr.istic.hbmlh.videogen.service.impl.VideoService.concatVideos(VideoService.kt:41)
+	at fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator.start(VideoGenMassVideoGenGenerator.java:53)
+	at fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator.main(VideoGenMassVideoGenGenerator.java:41)
+21:47:14.812 [main] INFO fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator - VideoGenMassVideoGenGenerator: début de la génération de /home/malah/Code/ISTIC/Projects/VideoGen/videogen_directory/Larzillière-Forget/specs.videogen
+21:47:14.839 [main] INFO fr.istic.hbmlh.videogen.randomizer.impl.RandomVideoGenGeneratorImpl - VideoGenParserImpl: Sélection d'une variante...
+21:47:14.839 [main] INFO fr.istic.hbmlh.videogen.parser.impl.VideoGenParserImpl - VideoGenParserImpl: début du parsing...
+21:47:14.839 [main] INFO fr.istic.hbmlh.videogen.parser.impl.VideoGenParserImpl - VideoGenParserImpl: Parsing fini, nous avons 12 variantes
+21:47:14.839 [main] INFO fr.istic.hbmlh.videogen.randomizer.impl.RandomVideoGenGeneratorImpl - VideoGenParserImpl: sélection faite, nous avons 5 videos.
+21:47:14.840 [main] INFO fr.istic.hbmlh.videogen.util.VideoUtils - Début de la concaténation de 5 vidéos
+21:47:14.870 [main] INFO fr.istic.hbmlh.videogen.util.VideoUtils - Done
+21:47:14.870 [main] INFO fr.istic.hbmlh.videogen.util.VideoUtils - Conversion du format .avi en .webm
+21:47:42.683 [main] INFO fr.istic.hbmlh.videogen.util.VideoUtils - Done
+21:47:42.683 [main] INFO fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator - VideoGenMassVideoGenGenerator: video généré /tmp/videogen/fef57361-21f2-4d4f-899c-da6b333f1ce7.webm
+21:47:42.683 [main] INFO fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator - VideoGenMassVideoGenGenerator: début de la génération de /home/malah/Code/ISTIC/Projects/VideoGen/videogen_directory/ROULEAU-Gautier/specs.videogen
+21:47:42.698 [main] INFO fr.istic.hbmlh.videogen.randomizer.impl.RandomVideoGenGeneratorImpl - VideoGenParserImpl: Sélection d'une variante...
+21:47:42.699 [main] INFO fr.istic.hbmlh.videogen.parser.impl.VideoGenParserImpl - VideoGenParserImpl: début du parsing...
+21:47:42.699 [main] INFO fr.istic.hbmlh.videogen.parser.impl.VideoGenParserImpl - VideoGenParserImpl: Parsing fini, nous avons 4 variantes
+21:47:42.699 [main] INFO fr.istic.hbmlh.videogen.randomizer.impl.RandomVideoGenGeneratorImpl - VideoGenParserImpl: sélection faite, nous avons 4 videos.
+21:47:42.699 [main] INFO fr.istic.hbmlh.videogen.util.VideoUtils - Début de la concaténation de 4 vidéos
+21:47:42.729 [main] INFO fr.istic.hbmlh.videogen.util.VideoUtils - Done
+21:47:42.730 [main] INFO fr.istic.hbmlh.videogen.util.VideoUtils - Conversion du format .m4v en .webm
+21:47:55.720 [main] INFO fr.istic.hbmlh.videogen.util.VideoUtils - Done
+21:47:55.720 [main] INFO fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator - VideoGenMassVideoGenGenerator: video généré /tmp/videogen/834fb14a-fb06-46d2-b624-722ccb51d8de.webm
+21:47:55.720 [main] INFO fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator - VideoGenMassVideoGenGenerator: début de la génération de /home/malah/Code/ISTIC/Projects/VideoGen/videogen_directory/video/example1_with_duration.videogen
+21:47:55.740 [main] INFO fr.istic.hbmlh.videogen.randomizer.impl.RandomVideoGenGeneratorImpl - VideoGenParserImpl: Sélection d'une variante...
+21:47:55.740 [main] INFO fr.istic.hbmlh.videogen.parser.impl.VideoGenParserImpl - VideoGenParserImpl: début du parsing...
+21:47:55.740 [main] INFO fr.istic.hbmlh.videogen.parser.impl.VideoGenParserImpl - VideoGenParserImpl: Parsing fini, nous avons 1 variantes
+21:47:55.740 [main] INFO fr.istic.hbmlh.videogen.randomizer.impl.RandomVideoGenGeneratorImpl - VideoGenParserImpl: sélection faite, nous avons 1 videos.
+21:47:55.740 [main] ERROR fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator - VideoGenMassVideoGenGenerator: une erreur est survenue
+fr.istic.hbmlh.videogen.exception.VideoGenException: Les videos /home/malah/Code/ISTIC/Projects/VideoGen/videogen_directory/video/video/0013_HD_light_540p.mov sont introuvables
+	at fr.istic.hbmlh.videogen.service.impl.VideoService.concatVideos(VideoService.kt:41)
+	at fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator.start(VideoGenMassVideoGenGenerator.java:53)
+	at fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator.main(VideoGenMassVideoGenGenerator.java:41)
+21:47:55.740 [main] INFO fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator - VideoGenMassVideoGenGenerator: début de la génération de /home/malah/Code/ISTIC/Projects/VideoGen/videogen_directory/example1.videogen
+21:47:55.758 [main] INFO fr.istic.hbmlh.videogen.randomizer.impl.RandomVideoGenGeneratorImpl - VideoGenParserImpl: Sélection d'une variante...
+21:47:55.758 [main] INFO fr.istic.hbmlh.videogen.parser.impl.VideoGenParserImpl - VideoGenParserImpl: début du parsing...
+21:47:55.890 [main] INFO fr.istic.hbmlh.videogen.parser.impl.VideoGenParserImpl - VideoGenParserImpl: Parsing fini, nous avons 30240 variantes
+21:47:55.890 [main] INFO fr.istic.hbmlh.videogen.randomizer.impl.RandomVideoGenGeneratorImpl - VideoGenParserImpl: sélection faite, nous avons 11 videos.
+21:47:55.890 [main] INFO fr.istic.hbmlh.videogen.util.VideoUtils - Début de la concaténation de 11 vidéos
+21:47:55.942 [main] INFO fr.istic.hbmlh.videogen.util.VideoUtils - Done
+21:47:55.942 [main] INFO fr.istic.hbmlh.videogen.util.VideoUtils - Conversion du format .mov en .webm
+21:48:04.399 [main] INFO fr.istic.hbmlh.videogen.util.VideoUtils - Done
+21:48:04.399 [main] INFO fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator - VideoGenMassVideoGenGenerator: video généré /tmp/videogen/e980e2fe-8da2-4895-ad92-9118a9540605.webm
+21:48:04.399 [main] INFO fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator - VideoGenMassVideoGenGenerator: début de la génération de /home/malah/Code/ISTIC/Projects/VideoGen/videogen_directory/LACHAAL-BOUYAMINE/spec.videogen
+21:48:04.412 [main] INFO fr.istic.hbmlh.videogen.randomizer.impl.RandomVideoGenGeneratorImpl - VideoGenParserImpl: Sélection d'une variante...
+21:48:04.412 [main] INFO fr.istic.hbmlh.videogen.parser.impl.VideoGenParserImpl - VideoGenParserImpl: début du parsing...
+21:48:04.413 [main] INFO fr.istic.hbmlh.videogen.parser.impl.VideoGenParserImpl - VideoGenParserImpl: Parsing fini, nous avons 162 variantes
+21:48:04.413 [main] INFO fr.istic.hbmlh.videogen.randomizer.impl.RandomVideoGenGeneratorImpl - VideoGenParserImpl: sélection faite, nous avons 10 videos.
+21:48:04.413 [main] INFO fr.istic.hbmlh.videogen.util.VideoUtils - Début de la concaténation de 10 vidéos
+21:48:04.437 [main] INFO fr.istic.hbmlh.videogen.util.VideoUtils - Done
+21:48:04.437 [main] INFO fr.istic.hbmlh.videogen.util.VideoUtils - Conversion du format .mp4 en .webm
+21:48:13.545 [main] INFO fr.istic.hbmlh.videogen.util.VideoUtils - Done
+21:48:13.545 [main] INFO fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator - VideoGenMassVideoGenGenerator: video généré /tmp/videogen/b049be90-0ae6-4269-b3c9-15564fabf371.webm
+21:48:13.545 [main] INFO fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator - VideoGenMassVideoGenGenerator: début de la génération de /home/malah/Code/ISTIC/Projects/VideoGen/videogen_directory/BANNIER_LE_HENAFF/spec.videogen
+21:48:13.558 [main] INFO fr.istic.hbmlh.videogen.randomizer.impl.RandomVideoGenGeneratorImpl - VideoGenParserImpl: Sélection d'une variante...
+21:48:13.558 [main] INFO fr.istic.hbmlh.videogen.parser.impl.VideoGenParserImpl - VideoGenParserImpl: début du parsing...
+21:48:13.562 [main] INFO fr.istic.hbmlh.videogen.parser.impl.VideoGenParserImpl - VideoGenParserImpl: Parsing fini, nous avons 1728 variantes
+21:48:13.562 [main] INFO fr.istic.hbmlh.videogen.randomizer.impl.RandomVideoGenGeneratorImpl - VideoGenParserImpl: sélection faite, nous avons 6 videos.
+21:48:13.562 [main] INFO fr.istic.hbmlh.videogen.util.VideoUtils - Début de la concaténation de 6 vidéos
+21:48:13.593 [main] INFO fr.istic.hbmlh.videogen.util.VideoUtils - Done
+21:48:13.593 [main] INFO fr.istic.hbmlh.videogen.util.VideoUtils - Conversion du format .avi en .webm
+21:48:46.257 [main] INFO fr.istic.hbmlh.videogen.util.VideoUtils - Done
+21:48:46.257 [main] INFO fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator - VideoGenMassVideoGenGenerator: video généré /tmp/videogen/902f63f5-1f82-4522-b07d-7cbe6cef7e0a.webm
+21:48:46.257 [main] INFO fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator - VideoGenMassVideoGenGenerator: début de la génération de /home/malah/Code/ISTIC/Projects/VideoGen/videogen_directory/__MACOSX/video/._example1_with_duration.videogen
+21:48:46.268 [main] ERROR fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator - VideoGenMassVideoGenGenerator: une erreur est survenue
+org.eclipse.emf.common.util.BasicEList$BasicIndexOutOfBoundsException: index=0, size=0
+	at org.eclipse.emf.common.util.BasicEList.get(BasicEList.java:346)
+	at fr.istic.hbmlh.videogen.generated.VideoGenHelper.loadVideoGenerator(VideoGenHelper.java:19)
+	at fr.istic.hbmlh.videogen.factory.impl.VideoGenParserFactoryImpl.create(VideoGenParserFactoryImpl.java:21)
+	at fr.istic.hbmlh.videogen.factory.impl.RandomVideoGenGeneratorFactoryImpl.create(RandomVideoGenGeneratorFactoryImpl.java:16)
+	at fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator.start(VideoGenMassVideoGenGenerator.java:51)
+	at fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator.main(VideoGenMassVideoGenGenerator.java:41)
+21:48:46.268 [main] INFO fr.istic.hbmlh.videogen.VideoGenMassVideoGenGenerator - VideoGenMassVideoGenGenerator: vidéo générées : 9, vidéo en erreur: 5
