@@ -29,7 +29,7 @@ public class VideoUtils {
     if (videosPath.isEmpty()) {
       throw new RuntimeException("Aucune vidéo à concatener !");
     }
-    videosPath.forEach(LOG::debug);
+    LOG.info("Début de la concaténation de {} vidéos", videosPath.size());
 
     final String format = VideoUtils.getFormatFromFilePath(videosPath.get(0));
 
@@ -46,7 +46,6 @@ public class VideoUtils {
       nomVideo + format
     );
 
-    LOG.info("Début de la concaténation de {} vidéos", videosPath.size());
     processBuilder.directory(videoConcatDirectory).start().waitFor();
     LOG.info("Done");
 
@@ -68,9 +67,9 @@ public class VideoUtils {
 
 
   public static void generateGifCommandLine(final String videoName) throws IOException, InterruptedException {
-    LOG.info("Début de la génération du gif");
+    LOG.info("Début de la génération du gif de la variante {}", videoName);
 
-    final File videoConcatDirectory = new File("/tmp/videogen");
+    final File videoConcatDirectory = new File(IVideoService.VIDEO_CONCAT_PATH);
 
     final String absoluteVideoPath = IVideoService.VIDEO_CONCAT_PATH + videoName + IVideoService.VIDEO_FORMAT;
     final String absoluteGifPath = IVideoService.GIF_CONCAT_PATH + videoName + IVideoService.GIF_FORMAT;
